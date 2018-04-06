@@ -59,6 +59,9 @@
 
 
 
+\usepackage{graphicx}
+
+
 
 % Some very useful LaTeX packages include:
 % (uncomment the ones you want to load)
@@ -347,7 +350,7 @@
 
 
 % correct bad hyphenation here
-\hyphenation{op-tical net-works semi-conduc-tor}
+%\hyphenation{op-tical net-works semi-conduc-tor}
 
 
 \begin{document}
@@ -358,7 +361,8 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Bare Demo of IEEEtran.cls\\ for IEEE Journals}
+\title{Electrocardiography Arrhythmia Analysis With Maximum Variance Unfolding Manifold Learning}
+
 %
 %
 % author names and IEEE memberships
@@ -370,14 +374,12 @@
 % was not built to handle multiple paragraphs
 %
 
-\author{Michael~Shell,~\IEEEmembership{Member,~IEEE,}
-        John~Doe,~\IEEEmembership{Fellow,~OSA,}
-        and~Jane~Doe,~\IEEEmembership{Life~Fellow,~IEEE}% <-this % stops a space
-\thanks{M. Shell was with the Department
-of Electrical and Computer Engineering, Georgia Institute of Technology, Atlanta,
-GA, 30332 USA e-mail: (see http://www.michaelshell.org/contact.html).}% <-this % stops a space
-\thanks{J. Doe and J. Doe are with Anonymous University.}% <-this % stops a space
-\thanks{Manuscript received April 19, 2005; revised August 26, 2015.}}
+\author{Yan~Yan,~\IEEEmembership{Student Member,~IEEE,}
+       % x~x,~\IEEEmembership{Senior Member,~IEEE,}
+        and~Lei~Wang,~\IEEEmembership{Senior Member,~IEEE}% <-this % stops a space
+\thanks{Y. Yan was with the Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences, and University of Chinese Academy of Sciences, China, e-mail: yan.yan@siat.ac.cn.}% <-this % stops a space
+\thanks{xx and L. Wang are with Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences.}% <-this % stops a space
+\thanks{Manuscript received ; revised.}}
 
 % note the % following the last \IEEEmembership and also \thanks - 
 % these prevent an unwanted space from occurring between the last author name
@@ -400,8 +402,8 @@ GA, 30332 USA e-mail: (see http://www.michaelshell.org/contact.html).}% <-this %
 
 
 % The paper headers
-\markboth{Journal of \LaTeX\ Class Files,~Vol.~14, No.~8, August~2015}%
-{Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for IEEE Journals}
+\markboth{xx}%
+{xx \MakeLowercase{\textit{et al.}}: Electrocardiography Arrhythmia Analysis With Semidefinite Embedding Based Manifold Learning}
 % The only time the second header will appear is for the odd numbered pages
 % after the title page when using the twoside option.
 % 
@@ -433,7 +435,8 @@ GA, 30332 USA e-mail: (see http://www.michaelshell.org/contact.html).}% <-this %
 % As a general rule, do not put math, special symbols or citations
 % in the abstract or keywords.
 \begin{abstract}
-The abstract goes here.
+The abstract goes here. demo file is intended to serve as a ``starter file''
+for IEEE journal papers 
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
@@ -475,8 +478,7 @@ IEEE, IEEEtran, journal, \LaTeX, paper, template.
 % Here we have the typical use of a "T" for an initial drop letter
 % and "HIS" in caps to complete the first word.
 \IEEEPARstart{T}{his} demo file is intended to serve as a ``starter file''
-for IEEE journal papers produced under \LaTeX\ using
-IEEEtran.cls version 1.8b and later.
+
 % You must have at least 2 lines in the paragraph with the drop letter
 % (should never be an issue)
 I wish you the best of success.
@@ -488,11 +490,33 @@ I wish you the best of success.
 \subsection{Subsection Heading Here}
 Subsection text here.
 
+
+
 % needed in second column of first page if using \IEEEpubid
 %\IEEEpubidadjcol
 
 \subsubsection{Subsubsection Heading Here}
 Subsubsection text here.
+
+\section{Theory}
+
+Subsection text here.
+
+
+\section{Material and Method}
+
+Subsection text here.
+
+
+
+\section{Results and Discussion}
+
+Subsection text here.
+
+
+\section{Conclusion}
+
+Subsection text here.
 
 
 % An example of a floating figure using the graphicx package.
@@ -680,22 +704,29 @@ H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
 %\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
 % or if you just want to reserve a space for a photo:
 
-\begin{IEEEbiography}{Michael Shell}
-Biography text here.
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{YY.pdf}}]{Yan Yan}
+received the B.Eng. degree and the MSc in Instrument Engineering at the Harbin Institute of Technology in 2010 and 2012 respectively. 
+He worked as research assistance at the Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences from 2012 to 2014. 
+He is working on his PhD in Computer Science started from 2014.
+His research interests are digital signal processing, machine learning, and control system.
+\end{IEEEbiography}
+
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{WL.pdf}}]{Lei Wang}
+received the B.Eng. degree in information and control engineering, and the Ph.D. degree in biomedical engineering from Xi’an Jiaotong University, Xi’an, China, in 1995 and 2000, respectively. He was with the University of Glasgow, Glasgow, U.K., and Imperial College London, London, U.K., from 2000 to 2008. He is currently a full professor with the Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences, Shenzhen, China. He has published over 200 scientific papers, authored four book chapters, and holds 60 patents. His current research interests include body sensor network, digital signal processing, and biomedical engineering
 \end{IEEEbiography}
 
 % if you will not have a photo at all:
-\begin{IEEEbiographynophoto}{John Doe}
-Biography text here.
-\end{IEEEbiographynophoto}
+%\begin{IEEEbiographynophoto}{John Doe}
+%%Biography text here.
+%\end{IEEEbiographynophoto}
 
 % insert where needed to balance the two columns on the last page with
 % biographies
 %\newpage
 
-\begin{IEEEbiographynophoto}{Jane Doe}
-Biography text here.
-\end{IEEEbiographynophoto}
+%\begin{IEEEbiographynophoto}{Jane Doe}
+%Biography text here.
+%\end{IEEEbiographynophoto}
 
 % You can push biographies down or up by placing
 % a \vfill before or after them. The appropriate
