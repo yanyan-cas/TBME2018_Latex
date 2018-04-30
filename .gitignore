@@ -7,3 +7,7 @@
 *.pdf
 *.pdf
 *.pdf
+*.bbl
+*.blg
+*.bak
+*.pdf
