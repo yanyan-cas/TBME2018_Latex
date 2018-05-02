@@ -64,6 +64,7 @@
 \usepackage{amsmath} % assumes amsmath package installed
 \DeclareMathOperator*{\argmax}{argmax}
 \DeclareMathOperator*{\argmin}{argmin}
+\usepackage{bm}
 
 \usepackage{algorithmic}
 \usepackage{algorithm}
@@ -564,7 +565,8 @@ Here we introduce several manifold learning techniques, the detailed theory and 
 Principal Component Analysis (PCA) is a linear dimensionality reduction method, which try to find a linear subspace of lower dimension keeping the largest variance compare to the original feature space.
 PCA is by far the most popular unsupervised linear technique.
 The most important task in PCA method is to find the principal components of a data set, which can be implemented by finding a linear basis with reduced dimensionality for the input data sets, with the amount of variance in the data is maximal.
-Mathematically, consider data set $\{\boldsymbol{x}_i\} \subset \mathbb{R}^d$, the embedded subspace with PCA can be denote as $\{\boldsymbol{y}_i\} \in \mathbb{R}^k$ ($d$ and $k$ are the dimension numbers). 
+
+Mathematically, consider data set $\{\boldsymbol{x}_i\} \subset \mathbb{R}^d$, the embedded subspace with PCA can be denote as $\{\boldsymbol{y}_i\} \subset \mathbb{R}^k$ ($d$ and $k$ are the dimension numbers). 
 Then the problem of finding the ``best"  $k$ principal components can be transfer to finding $k$-dimensional subspaces that minimize the orthogonal distances.
 Solve 
 \begin{equation}
@@ -575,12 +577,35 @@ where $P_s(\cdot)$ is the projection onto subspace $\mathcal{S}$.
 Solution of this problem is to find a linear mapping $\boldsymbol{M}$ from the original space to subspace $\mathcal{S}$, which maximizes the cost function $trace(\boldsymbol{M}^Tcov(\boldsymbol{X})\boldsymbol{M}))$. Then the data low-dimensional data features $\boldsymbol{y}_i$ of data points $\boldsymbol{x}_i$ in original space can be computed by mapping $\boldsymbol{Y} = \boldsymbol{X} \boldsymbol{M}$.
 A detailed theory analysis and tutorial can be found in \cite{abdi2010principal} and \cite{shlens2014tutorial} respectively. 
 
-\subsection{Kernel PCA}
-
 
 
 \subsection{MDS}
+Multidimensional Scaling (MDS) is a typical form of nonlinear dimensionality reduction method. MDS algorithm tries map each object some metric space such that the intra-point distances are preserved as well as possible. 
+MDS had been widely used in data analysis, data representation  \& visualization, and manifold learning.
 
+Mathematically, consider a MDS mapping $\boldsymbol{\Phi}$ from data set $\mathcal{X} = \{\boldsymbol{x}_i\}$ to a target space $\mathbb{R}^n$, such that the distance condition holds:
+\begin{equation}
+\Vert \bm{\Phi}(\bm{x}_i) - \bm{\Phi}(\bm{x}_j) \Vert ^2 = d^2(\bm{x}_i, \bm{x}_j)
+\end{equation}
+
+blabalaall
+
+
+\subsection{Isomap}
+MDS used the distance definition based on Euclidean space, which neglect the distribution of neighboring data points.
+While in many case, the high-dimensional data lies on or near a curved manifold, MDS may lead a mistake like in the Swiss roll dataset.
+The reason is that the MDS method consider tow data points as near points whereas the distance over the manifold is much large than the inner distance.
+Isomap resolves this problem by using a pairwise geodesic distance instead of Euclidean based distance.
+
+
+
+\subsection{Kernel PCA}
+Kernel PCA is a reformulation of linear PCA in a high-dimensional space constructed using kernel functions.
+Kernel PCA computes the principal eigenvectors of the kernel matrix rather than the covariance matrix in the origin PCA method.
+Apparently, constructing the kernel space transfer the linear based PCA into a nonlinear mapping.
+
+\subsection{Maximum Variance Unfolding (Semidefinite Embedding)}
+From the 
 
 
 
