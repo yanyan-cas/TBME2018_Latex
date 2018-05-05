@@ -607,9 +607,20 @@ Since in the kernel PCA based method, the choice of kernel function is quite arb
 Sometime a poor kernel function could not lead to a good manifold embedding.
 Maximum Variance Unfolding (MVU) is a technique that attempts to solve such problem by learning from data so that the kernel matrix can be obtained, which was formerly known as Semidefinite Embedding \cite{weinberger2006unsupervised}.
 
-In MVU based methods, a notion of local isometry was proposed.
+The notion of local isometry was proposed in MVU.
 In mathematics, an isometry of a manifold is any (smooth) mapping of that manifold into itself, or into another manifold that preserves the notion of distance between points. 
 Given $n$ input points $\bm{x}_i \in \mathbb{R}^d$ and a prescription for identifying neighborhood relations,  find some mapped output  $\bm{y}_i \in \mathbb{R}^k$ such that both the inputs and outputs are both locally isometric (or approximation locally isometric).
+MVU starts with the construction of graph $\mathcal{G}$ illustrates the neighborhood relations. $\bm{x}_i$ is connected to its $k$ nearest neighbors, MVU tries to maximize the sum of the squared Euclidean distances between data points, with the constraint that the distances inside $\mathcal{G}$ are preserved.
+Mathematically, let $\bm{y}_i$ denote the mapped representation of $\bm{x}_i$, and define a kernel matrix $\bm{K}$ as the outer product of data presentations $\bm{Y}$. After reformulating the problem turns to:
+\begin{equation}
+\begin{split}
+& \argmax \sum_{ij}\Vert \bm{y}_i - \bm{y}_j \Vert^2  \\
+& s.t. \quad  \Vert \bm{y}_i - \bm{y}_j \Vert^2 = \Vert \bm{x}_i - \bm{x}_j \Vert^2 \quad for \quad \forall (i, j) \in \mathcal{G} \\
+\end{split}
+\end{equation}
+After we solve the semidefinite programming problem (SDP), the low-dimensional data representation $\bm{Y}$ is obtained by performing an eigenvector decomposition of $\bm{K}$.
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -643,8 +654,17 @@ In the low-dimensional manifold, LLE attempts to retain the reconstruction weigh
 
 
 
+LLE describes the local properties of the manifold around a data point  $\bm{x}_i $ using a linear combination of its $k$ nearest neighbors with related  reconstruction weights $\bm{w}_i$. 
+There is an assumption that the manifold is locally linear, which means that $\bm{w}_i$ of datapoints $\bm{x}_i$ are invariant to translation, rotation, and rescaling.
+Then the reconstruction weights $\bm{w}_i$ can also reconstruct datapoint $\bm{y}_i$ from its neighbors in the low-dimensional data representation.
+Then finding the data representation $\bm{Y}$ can be consider as an optimization problem
 
-
+\begin{equation}
+\begin{split}
+& \argmin \sum_{i}\Vert \bm{y}_i - \sum_{j=1}^k w_{ij}\bm{y}_{i_j} \Vert^2  \\
+& s.t. \quad  \Vert \bm{y}^{(k)} = 1 \quad for \quad \forall k\\
+\end{split}
+\end{equation}
 
 
 
@@ -722,13 +742,10 @@ In the heartbeat segmentation process, the segmentation program of Laguna [59] w
 
 \subsection{Manifold Embedding Methods}
 
-\lipsum[1-4]
 \subsection{Autoencoder Based Feature Extraction}
-\lipsum[1-4]
+
 
 \section{Results and Discussion}
-\lipsum
-\lipsum
 
 
 
