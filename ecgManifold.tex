@@ -71,7 +71,7 @@
 \renewcommand{\algorithmicrequire}{\textbf{Input:}}
  \renewcommand{\algorithmicensure}{\textbf{Output:}}
 
-
+\usepackage{lipsum}
 % Some very useful LaTeX packages include:
 % (uncomment the ones you want to load)
 
@@ -385,10 +385,10 @@
 
 \author{Yan~Yan,~\IEEEmembership{Student Member,~IEEE,}
        % x~x,~\IEEEmembership{Senior Member,~IEEE,}
-        and~Lei~Wang,~\IEEEmembership{Senior Member,~IEEE}% <-this % stops a space
-\thanks{Y. Yan was with the Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences, and University of Chinese Academy of Sciences, China, e-mail: yan.yan@siat.ac.cn.}% <-this % stops a space
-\thanks{L. Wang was with Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences.}% <-this % stops a space
-\thanks{Manuscript received ; revised.}}
+        and~Lei~Wang,~\IEEEmembership{}% <-this % stops a space
+\thanks{Y. Yan is with the Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences, and University of Chinese Academy of Sciences, China, (e-mail: yan.yan@siat.ac.cn).}% <-this % stops a space
+\thanks{L. Wang is with Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences.}% <-this % stops a space
+\thanks{Manuscript received ; revised. }}
 
 % note the % following the last \IEEEmembership and also \thanks - 
 % these prevent an unwanted space from occurring between the last author name
@@ -444,8 +444,8 @@
 % As a general rule, do not put math, special symbols or citations
 % in the abstract or keywords.
 \begin{abstract}
-The abstract goes here. demo file is intended to serve as a ``starter file''
-for IEEE journal papers 
+\lipsum[1]
+\lipsum[1]
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
@@ -486,66 +486,49 @@ IEEE, IEEEtran, journal, \LaTeX, paper, template.
 % 
 % Here we have the typical use of a "T" for an initial drop letter
 % and "HIS" in caps to complete the first word.
-\IEEEPARstart{A}{n} era of big data in healthcare is now under way, decades of progress in digitalizing medical records accumulate vast amounts of medical data, simultaneously mobile healthcare and wearable sensor technologies offer healthcare data from larger population coverage. The noninvasive, inexpensive and well-established technology of electrocardiographic signal in mobile health or personal health has the greatest popularity in heart function analysis. Automated electrocardiography classification provides indispensable assist in long-term clinical monitoring, and a large number of approaches have been proposed for the task, easing the diagnosis of arrhythmic changes as well as further inspection, e.g., heart rate variability or heart turbulence analysis.
+\IEEEPARstart{T}{he} computer aided system for pathology detection and diagnosis are based on a feature space constructed from abundant clinical attributes.
+The noninvasive, inexpensive and well-established technology of electrocardiographic signal in mobile health or personal health has the greatest popularity in heart function analysis. 
+Automated arrhythmia analysis provides indispensable assist in long-term clinical monitoring, and a large number of approaches have been proposed for the task, easing the diagnosis of arrhythmic changes as well as further inspection, e.g., heart rate variability or heart turbulence analysis.
+Information in  electrocardiography signals related to the cardiac electrical activity is therefore represented by a large dimensional space from the data analysis angle.
+Plenty of parameters were extracted from the high dimensional data as the indicators for diagnosis. 
+The large dimensional space hinders a proper interpretation of the embedded symbolic physiology in the feature space \cite{delgado2009dimensionality}.
+However, the increasingly developing of the artificial intelligence domain and machine learning methods provides powerful tools to deal with the large dimensional electrocardiography data.
 
-Lots of algorithms had been proposed for the classification and detection of electrocardiography signals. The electrocardiography classification or detection task had been divided into two parts: the feature extraction process and classifier. Sim- ple classifier such as linear discriminants [2] and kNN [3], more complex classifiers like neural networks [4–7], fuzzy inference engines [7,8], hidden Markov model [9,10], independent component analysis [11] and support vector machine [3,12,13] were also adopted by lots of researchers.
-Beyond the classifier, the performance of a recognition system highly depends on the determination of extracted electrocardiography features. Time domain features, frequency domain features, and statistical measures features for six fundamental waves (PQRSTU) had been used in feature extraction process [14]. Time domain features like morphological features include shapes, amplitudes, and durations were adapted primarily in [15–17], frequency domain features like wavelet transformation were widely used [18], [19] stationary features like higher-order statistics also had been developed. Principal component analysis [20] and Hermite functions [21] have been used in electrocardiography classification and related analysis technologies as well. Almost every single published paper proposes a new set of features to be used, or a new combination of the existing ones [1].
-The results from these algorithms or models were not amenable to expert labelling, as well as for the identification of complex relationships between subjects and clinical conditions [22]. But for the ambulatory electrocardiography clinical application, as well as the normal application in daily healthcare monitoring for cardiac function or early warning of heart disease, an automated algorithm or model would have significant meaning. The application of artificial intelligence methods has become an important trend in electrocardiography for the recognition and classification of different arrhythmia types [22]. The data explosion puts forward the new request to the method of data processing and information mining.
-Over the past decades computational techniques proliferated in the pattern recognition field, simultaneously the applications in electrocardiography recognition, detection and classification for relevant trends, patterns, and outliers. Most of the literatures in the electrocardiography classification task were focused on the supervised learning methods, as in unsupervised learning methods were infrequently used, which needs a lot of effort in labelling data. The MIT-BIH database [23] was the most widely used data in the classification and detection algorithm developments, while mass unlabelled electrocardiography data had been ignored due to the supervise learning approaches essential. Unsupervised learning methods become crucial in mining or analyzing unlabelled data, as the unlabelled electrocardiography data accumulated. Unsupervised learning-based approaches and the application to electrocardiogram classification in literatures mainly include clustering-based techniques [21,24,25], self-adaptive neural network-based methods [26,27] and some hybrid unsupervised learning systems [28].
 
 
-\section{State of the Art}
-Unsupervised off-line learning has seen very little
-attention in 3D model retrieval. The purity proposed by
-Bustos et al. [Bustos04] can also be considered as a
-weak form of unsupervised off-line learning. Purity is
-an estimate of the performance of a shape descriptor
-determined by using a pre-classified training database.
-Bustos used the purity to weight distance obtained from
-multiple shape descriptors.
-Classical methods for unsupervised learning of
-subspace includes PCA and MDS, both of which are
-quite effective if the feature points lie on or near a
-linear subspace of the input space. However, if the
-subspace is non-linear, these methods do not work well.
-Many non-linear methods have been proposed for
-unsupervised learning of subspace; Self-Organizing
-Map (SOM) and Kernel-PCA are some of the wellknown
-examples [Haykin99]. Recently, a class of
-geometrically inspired non-linear methods, called
-“manifold learning” has been proposed for learning the
-m-manifold of measured feature vectors. Some of the
-examples of manifold learning algorithms are Isomap
-[Tannenbaum00], Locally Linear Embedding (LLE)
-[Roweis00], Laplacian Eigenmaps (LE) [Belkin03],
-Locality Preserving Projection [He03], and others.
-Manifold learning has been applied to many problems,
-including articulated figure motion analysis, multimedia
-data retrieval, and others.
-As a side note, these manifold learning algorithms
-have connections to reconstruction of a surface-based a 
-3D model from a point set, that is, estimation of a 2D
-manifold embedded in 3D space (e.g.,[Alexa01]).
-Analysis of 3D point set shape by using local meshing
-and spectra of mesh Laplacian, an approach used to
-watermark 3D point set models [Cotting04, Ohbuchi04]
-have resemblance to LE and LLE.
-Most of the effort so far on learning in the area of
-shape-based 3D model retrieval has been on interactive
-relevance feedback based approaches [Elad01,
-Leifman05, Novotni05]. Elad et al. is among the first to
-apply Support Vector Machines (SVM) learning in an
-on-line learning setting to improve 3D model retrieval
-[Elad01]. Leifman et al. [Leifman05] performed Kernel
-Principal Component Analysis (Kernel PCA) for an
-unsupervised learning of a feature subspace before
-applying a relevance feedback technique that employs
-Biased Discriminant Analysis (BDA) or Linear
-Discriminant Analysis (LDA) on the learned subspace.
-Novotni et al. [Novotni05] compared several learning
-methods, SVM, BDA, and Kernel-BDA, for their
-retrieval performance in a relevance feedback setting. 
 
+
+Lots of algorithms had been proposed for the classification and detection of electrocardiography signals. 
+The electrocardiography classification or detection task had been divided into two parts: the feature extraction process and classifier. 
+Simple classifier such as linear discriminants \cite{chaza} and kNN \cite{melgan}, more complex classifiers like neural networks \cite{jiang, olmez, lin, osowski}, fuzzy inference engines \cite{osowski, kundu}, hidden Markov model \cite{andreao, coast}, independent component analysis \cite{zhu} and support vector machine  \cite{melgan, kampoura, khandoker} were also adopted by lots of researchers.  
+
+
+
+Beyond the classifier, the performance of a recognition system highly depends on the determination of extracted electrocardiography features. Time domain features, frequency domain features, and statistical measures features for six fundamental waves (PQRSTU) had been used in feature extraction process \cite{chia}. 
+Time domain features like morphological features include shapes, amplitudes, and durations were adapted primarily in \cite{jekova, christove, can}, frequency domain features like wavelet transformation were widely used \cite{inan}, \cite{banerjee} stationary features like higher-order statistics also had been developed. 
+Principal component analysis \cite{stam} and Hermite functions \cite{lager} have been used in electrocardiography classification and related analysis technologies as well.
+Almost every single published paper proposes a new set of features to be used, or a new combination of the existing ones \cite{mar}.
+
+
+The results from these algorithms or models were not amenable to expert labelling, as well as for the identification of complex relationships between subjects and clinical conditions \cite{clifford}.
+But for the ambulatory electrocardiography clinical application, as well as the normal application in daily healthcare monitoring for cardiac function or early warning of heart disease, an automated algorithm or model would have significant meaning.
+The application of artificial intelligence methods has become an important trend in electrocardiography for the recognition and classification of different arrhythmia types \cite{clifford}. 
+The data explosion puts forward the new request to the method of data processing and information mining.
+
+
+
+Over the past decades computational techniques proliferated in the pattern recognition field, simultaneously the applications in electrocardiography recognition, detection and classification for relevant trends, patterns, and outliers. 
+Most of the literatures in the electrocardiography classification task were focused on the supervised learning methods, as in unsupervised learning methods were infrequently used, which needs a lot of effort in labelling data. The MIT-BIH database \cite{physionet} was the most widely used data in the classification and detection algorithm developments, while mass unlabelled electrocardiography data had been ignored due to the supervise learning approaches essential. 
+Unsupervised learning methods become crucial in mining or analysing unlabelled data, as the unlabelled electrocardiography data accumulated. Unsupervised learning-based approaches and the application to electrocardiogram classification in literatures mainly include clustering-based techniques \cite{lager, nishizawa, maier}, self-adaptive neural network-based methods \cite{palreddy, risk} and some hybrid unsupervised learning systems \cite{tadejko}. 
+
+Manifold learning is a kind of method attempting to uncover the manifold structure in a data set, it can also be considered as a kind of nonlinear dimensional reduction technique.
+It has been widely used in multivariate data classification, data analysis, and data visualization.
+Manifold learning directly map the input data space into some feature space to find a better descriptor to analysis the real world problems. 
+
+
+
+
+\lipsum[1-3]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %                     SECTION III: Methodology
@@ -560,6 +543,13 @@ Here we adopt several manifold learning based techniques to embed the high dimen
 With the techniques some data properties were preserved in the embedded subspace (feature space).
 Then we train a classifier in the feature space using the labelled data, and use the classifier to classify the unlabelled data. From which we can get the arrhythmia information. 
 Here we introduce several manifold learning techniques, the detailed theory and explanation can be accessed from the related literatures.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%                     PCA
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{PCA}
 Principal Component Analysis (PCA) is a linear dimensionality reduction method, which try to find a linear subspace of lower dimension keeping the largest variance compare to the original feature space.
@@ -578,43 +568,142 @@ Solution of this problem is to find a linear mapping $\boldsymbol{M}$ from the o
 A detailed theory analysis and tutorial can be found in \cite{abdi2010principal} and \cite{shlens2014tutorial} respectively. 
 
 
-
-\subsection{MDS}
-Multidimensional Scaling (MDS) is a typical form of nonlinear dimensionality reduction method. MDS algorithm tries map each object some metric space such that the intra-point distances are preserved as well as possible. 
-MDS had been widely used in data analysis, data representation  \& visualization, and manifold learning.
-
-Mathematically, consider a MDS mapping $\boldsymbol{\Phi}$ from data set $\mathcal{X} = \{\boldsymbol{x}_i\}$ to a target space $\mathbb{R}^n$, such that the distance condition holds:
-\begin{equation}
-\Vert \bm{\Phi}(\bm{x}_i) - \bm{\Phi}(\bm{x}_j) \Vert ^2 = d^2(\bm{x}_i, \bm{x}_j)
-\end{equation}
-
-blabalaall
-
-
-\subsection{Isomap}
-MDS used the distance definition based on Euclidean space, which neglect the distribution of neighboring data points.
-While in many case, the high-dimensional data lies on or near a curved manifold, MDS may lead a mistake like in the Swiss roll dataset.
-The reason is that the MDS method consider tow data points as near points whereas the distance over the manifold is much large than the inner distance.
-Isomap resolves this problem by using a pairwise geodesic distance instead of Euclidean based distance.
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%                 Kernel PCA
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Kernel PCA}
+The linear mapping could not be an accurate description of data in the nonlinear case, which happens in real world applications like the arrhythmia analysis.
+In these cases, PCA will produce a large error measure. 
+The geometrically nonlinear surface of data motivated different kinds of modeling approaches include kernel PCA.
 Kernel PCA is a reformulation of linear PCA in a high-dimensional space constructed using kernel functions.
 Kernel PCA computes the principal eigenvectors of the kernel matrix rather than the covariance matrix in the origin PCA method.
 Apparently, constructing the kernel space transfer the linear based PCA into a nonlinear mapping.
+The idea behind kernel PCA is to project the data into a new, higher-dimensional feature space.
+
+Mathematically, let $n$ data points (here are the segmented heartbeat sample) $\bm{x}_i \in \mathbb{R}^d$ be given, suppose $\bm{\phi}: \mathbb{R}^d \to \mathbb{R}^D$, where $D > d$.
+Assume that the mapping in the feature vectors have zero mean which is $\frac{1}{n}\sum_{i=1}^n \bm{\phi}(\bm{x})_i = 0$. Use $\bm{\Phi} = [\bm{\phi} (\bm{x}_1), \bm{\phi}(\bm{x}_2), \ldots, \bm{\phi}(\bm{x}_n)]^T \in \mathbb{R}^{n \times D}$, apply PCA to $\bm{\Phi}$.
+Usually the $\bm{\phi}(\bm{x}_i)$ are unknown and it is not possible to work out the decomposition explicitly, then we define 
+\begin{equation}
+\kappa(\bm{x}_i, \bm{x}_i) =\bm{\phi}(\bm{x}_i)^T\bm{\phi}(\bm{x}_i)
+\end{equation}
+and consider $\bm{\Phi}\bm{\Phi}^T = \{\bm{\phi}(\bm{x}_i)^T \bm{\phi}(\bm{x}_i)\}$, so we have kernel matrix under the mapping of $\bm{\phi}(\cdot)$ is $\bm{K} = \{\kappa(\bm{x}_i, \bm{x}_j)\}$.
+The principal $d$ eigenvectors of the centered kernel matrix can be computed, then the covariance matrix in feature space is constructed by $\kappa$.
+A similar optimization problem can be summarized like in Equation \ref{equPCA} while the projection involves a kernel transformation.
+Details of kernel PCA theory and application tutorial can be found in \cite{shawe2004kernel, chatfield2018introduction, van2009dimensionality}.
+Kernel PCA is a kernel-based method, the mapping performed greatly relies on the choice of kernel function $\kappa$.
+The linear mapping PCA could be equal to a Kernel PCA when a linear kernel is chosen. Typical kernel functions include Gaussian kernel, polynomial kernel etc. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%                     MVU
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Maximum Variance Unfolding (Semidefinite Embedding)}
-From the 
+Since in the kernel PCA based method, the choice of kernel function is quite arbitrary. 
+Sometime a poor kernel function could not lead to a good manifold embedding.
+Maximum Variance Unfolding (MVU) is a technique that attempts to solve such problem by learning from data so that the kernel matrix can be obtained, which was formerly known as Semidefinite Embedding \cite{weinberger2006unsupervised}.
+
+In MVU based methods, a notion of local isometry was proposed.
+In mathematics, an isometry of a manifold is any (smooth) mapping of that manifold into itself, or into another manifold that preserves the notion of distance between points. 
+Given $n$ input points $\bm{x}_i \in \mathbb{R}^d$ and a prescription for identifying neighborhood relations,  find some mapped output  $\bm{y}_i \in \mathbb{R}^k$ such that both the inputs and outputs are both locally isometric (or approximation locally isometric).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%                     ISOMAP
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Isomap}
+PCA finds a low-dimensional representation of the data points that best preserves the variance as which measured in the high-dimensional input space.
+Later the classical multidimensional scaling (MDS) method was proposed which finds an embedding preserving the inter-point distances\cite{Kruskal1978Multidimensional}. 
+The MDS method equivalent to PCA when those distances are Euclidean.
+While in many case, the high-dimensional data lies on or near a curved manifold, PCA and MDS may lead a mistake in the some datasets contain essential nonlinear structures that are invisible to them, like in some face recognition dataset.
+Isomap builds on classical MDS but seeks to preserve the intrinsic geometry of the data, as captured in the geodesic manifold distances between all pairs of data points \cite{tenenbaum2000isomap}. 
+
+Mathematically, the geodesic distance between the data points  $\{\bm{x}_i\} \subset \mathbb{R}^d$ are computed so as to construct a neighborhood graph $\mathcal{G}$, where every data point $\{\bm{x}_i\}$ is connected with its $k$ nearest neighbors in the dataset.
+The shortest path between two points in the graph forms an estimate of geodesic distance, which can be computed using Dijkstra's shortest-path algorithm, therefore we can get a pairwise geodesic distance matrix $\mathcal{D}$.
+The low-dimensional representation can be achieved by MDS on $\mathcal{D}$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%                     LLE
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Local Linear Embedding}
+Local Linear Embedding is a technique that is similar to Isomap and MVU, all try to construct a graph representation of the data points.
+Compare to Isomap, LLE only attempts to preserve local properties of data \cite{saul2000introduction}, which are constructed by writing the high-dimensional data points as a linear combination of their nearest neighbors.
+In the low-dimensional manifold, LLE attempts to retain the reconstruction weights in the linear combinations as good as possible.
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%                     LE
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Laplacian Eigenmaps}
+\cite{belkin2003laplacian}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%                     Sammon
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Sammon Mapping}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%                     SAE
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Multilayer Autoencoder}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%                     Classifier
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Classifier Adopted}
+
+
+
+
+
 
 
 
 \section{Material And Experiments}
 \subsection{Data Collection}
-Acquiring and storing ECG data were the base for an analyzing task. Errors might creep into an analysis at any possible stage. Thus, not only the acquisition hardware system but also the transmission and storage should be carefully designed. As for the signal acquiring process, different kinds of sample rates might be involved, for common ECG acquisition device the sample rate would be 128Hz, 250Hz, 340Hz or 500Hz even higher. In murine studies, a sampling rate as high as 2kHz is considered sufficiently. Arbitrary resizing would be an ideal procedure to handle with the different sampling rate from a different data source to build the datasets for analysis, which would be adopted in the experiment to keep data consistency.
-Data Pre-processing
-Before the segmentation and feature extraction process, the ECG signals were pre- processed. As in the procedure of collecting ECG signals, in addition to the ECG signals, the baseline wander (caused by Perspiration, respiration and body movements), power line interference and muscle noise were recorded as well, which had been described in lots of literature [41]. When the filtering methods were proposed and adopted in the preprocessing, the desired information should not be altered. The ECG typically exhibits persistent features like P-QRS- T morphology and average RR interval, and non-stationary features like individual RR and QT intervals, long-term heart rate trends [22]. Possible distortions caused by filtering should be quantified in these features.
-The filtered ECG signals then were segmented into individual heartbeat wave- forms depends on the detected R peaks in a classification task. The ECG segmentation can be seen as the decoding procedure of an observation sequence regard- ing beat waveforms [42]. Dynamic time warping [43], time warping [44], Bayesian framework [45], hidden Markov models [42], weighted diagnostic distortion [46], morphology and heartbeat interval based methods [47] and genetic methods [48] had been used in this subtask. The state accuracies were close to 100\%, which would be accurate enough in most online and offline applications.
+As for the signal acquiring process, different kinds of sample rates might be involved, for common ECG acquisition device the sample rate would be 128Hz, 250Hz, 340Hz or 500Hz even higher. 
+In murine studies, a sampling rate as high as 2kHz is considered sufficiently.
+Arbitrary resizing would be an ideal procedure to handle with the different sampling rate from a different data source to build the datasets for analysis, which would be adopted in the experiment to keep data consistency.
+
 
 \subsection{ECG Arrhythmia}
 After the segmentation for the ECG records, we got plenty of ECG waveform sam- ples with variety categories. Since different physiological disorder may be reflected on the different type of abnormal heartbeat rhythms. For the task of classification, it is quite important to determine the classes would be used. In the early liter- ature, there were no unified class labels for an ECG classification problem. The MIT-BIH Arrhythmia Database was the first available set of standard test material for evaluation of arrhythmia detectors; it played an important role in stimulating manufacturers of arrhythmia analyzers to compete by objectively measurable per- formance. The annotations in the open database for the ECG categories adopted the ANSI/AAMI EC57: 1998/(R)2008 standard AAMI (2008), which recommended to group the heartbeats into five classes: on-ectopic beats (N as the Figure ?? (a)); supraventricular ectopic beat (S as the Figure ?? (b)); ventricular ectopic beat (V as the Figure ?? (c) and (d)); fusion of a V and a N (F); unknown beat type (Q). These classes or labels have been widely used in the ECG classification tasks re- lated literature (Table ?? illustrated). The normal beat, supraventricular ectopic beat and the ventricular ectopic beat categories were used much more frequently while the unknown beat type were abandoned because of its clinical valueless.
@@ -631,57 +720,21 @@ In the preprocessing stage, filtering algorithms were adapted to remove the arte
 Before the segmentation procedure from the long-time monitoring ECG signals- Heartbeat Detection: For the heartbeat detection, the MIT-BIH database and un- labelled database, the positions of R waves are determined. The provided fiducial points of R wave had been used as the basis of wave segmentation. The details of the implementation of R wave detection would not be described in this study, and a reference for the R wave detection algorithms had been explored in [58].
 In the heartbeat segmentation process, the segmentation program of Laguna [59] was adapted, which also had been validated by other related work [2]. The segmentation process was focus on the Lead I of the recordings. After the segmentation for the ambulatory ECG database, three parts of heartbeat samples listed in Table 1 were acquired for the classification task. As for the pretraining, fine-tuning for our proposed task and comparison, we divided all the samples into three groups: the pretraining group as dataset A, the fine-tuning group as dataset B and test group as dataset C (illustrated in Table 2). Samples are chosen randomly from the original AR and LT database, the details of the sample class would be described in the experiment result analysis. As the algorithm of the deep structure training illustrated, both unsupervised learning and supervised learning are involved in the training process. The pre-training mainly used the unlabelled data to train the autoencoder parts, which only need to set the outputs equal to the inputs. Training data adopted in the unsupervised learning step include the whole samples from the ambulatory electrocardiography database and parts of the MIT-BHI database samples. In the supervised learning step, the MIT-BHI database samples with labels were adopted.
 
-\subsection{Data Embedding}
-\subsubsection{PCA}: Consider the settings in Section III.A, we may have the following PCA algorithm \ref{alg1}
+\subsection{Manifold Embedding Methods}
 
-\begin{algorithm}
- \caption{Principal Component Analysis}
- \label{alg1}
- \begin{algorithmic}
- \REQUIRE Data Set $ X = [x_1, x_2, \ldots, x_n]^T$
- \ENSURE $y = x^n$
- \STATE $y \leftarrow 1$
-  \end{algorithmic}
- \end{algorithm}
-
-
-
-\subsubsection{Kernel PCA}
-
-\subsubsection{MDS}
-
-\subsubsection{Isomap}
-
-\subsection{Out-of-Sample Extending}
-
-\subsection{Performance Assessment}
-
-
+\lipsum[1-4]
+\subsection{Autoencoder Based Feature Extraction}
+\lipsum[1-4]
 
 \section{Results and Discussion}
+\lipsum
+\lipsum
 
-Subsection text here.
+
+
 
 \section{Conclusion and Future Work}
-In this paper, we explored an approach to improve
-shape-based 3D model retrieval performance through
-the distance measure that adapt to the database by
-means of learning based dimension reduction algorithm.
-Experimental comparison of efficacy of five dimension
-reduction algorithms showed that LE and LLE, both of
-which are local, non-linear dimension reduction
-methods, work better among the set of methods we tried.
-While the efficacy varies depending on the shape
-features, the unsupervised learning-based dimension
-reduction approach can be quite effective overall in
-improving retrieval performance of a wide range of
-shape features, especially if it is combined with the
-multiresolution shape comparison approach we have
-previously proposed [Ohbuchi03].
-A possible future work would be an addition of
-relevance-feedback mechanism on the learned manifold
-to adapt to a user’s preference and/or a search occasion,
-in addition to the database to be searched for. 
+
 
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
@@ -780,12 +833,6 @@ in addition to the database to be searched for.
 
 
 
-\section{Conclusion}
-The conclusion goes here.
-
-
-
-
 
 % if have a single appendix:
 %\appendix[Proof of the Zonklar Equations]
@@ -804,19 +851,23 @@ The conclusion goes here.
 
 \appendices
 \section{Proof of the First Zonklar Equation}
-Appendix one text goes here.
-
+\lipsum[1-3]
 % you can choose not to have a title for an appendix
 % if you want by leaving the argument blank
-\section{}
-Appendix two text goes here.
-
+\begin{algorithm}
+ \caption{Principal Component Analysis}
+ \label{alg1}
+ \begin{algorithmic}
+ \REQUIRE Data Set $ X = [x_1, x_2, \ldots, x_n]^T$
+ \ENSURE $y = x^n$
+ \STATE $y \leftarrow 1$
+  \end{algorithmic}
+ \end{algorithm}
 
 % use section* for acknowledgment
 \section*{Acknowledgment}
+This work was supported by the National Natural Science Foundation of China, Grant No. 71531004.
 
-
-The authors would like to thank...
 
 
 % Can use something like this to put references on a page
@@ -845,7 +896,7 @@ The authors would like to thank...
 \bibliographystyle{IEEEtran}
 % argument is your BibTeX string definitions and bibliography database(s)
 \bibliography{ecgManifold}
-%
+
 % <OR> manually copy in the resultant .bbl file
 % set second argument of \begin to the number of references
 % (used to reserve space for the reference number labels box)
