@@ -561,7 +561,8 @@ Then the problem of finding the ``best"  $k$ principal components can be transfe
 Solve 
 \begin{equation}
 \label{equPCA}
-\argmin_\mathcal{S} \sum_{i=1}^d \Vert \boldsymbol{x}_i - P_\mathcal{S}(\boldsymbol{x}_i) \Vert_2^2
+\argmin \sum_{ij} (d_{ij}^2 - \Vert \bm{y}_i - \bm{y}_j \Vert^2)
+%\argmin_\mathcal{S} \sum_{i=1}^d \Vert \boldsymbol{x}_i - P_\mathcal{S}(\boldsymbol{x}_i) \Vert_2^2
 \end{equation}
 where $P_s(\cdot)$ is the projection onto subspace $\mathcal{S}$.
 Solution of this problem is to find a linear mapping $\boldsymbol{M}$ from the original space to subspace $\mathcal{S}$, which maximizes the cost function $trace(\boldsymbol{M}^Tcov(\boldsymbol{X})\boldsymbol{M}))$. Then the data low-dimensional data features $\boldsymbol{y}_i$ of data points $\boldsymbol{x}_i$ in original space can be computed by mapping $\boldsymbol{Y} = \boldsymbol{X} \boldsymbol{M}$.
@@ -662,9 +663,10 @@ Then finding the data representation $\bm{Y}$ can be consider as an optimization
 \begin{equation}
 \begin{split}
 & \argmin \sum_{i}\Vert \bm{y}_i - \sum_{j=1}^k w_{ij}\bm{y}_{i_j} \Vert^2  \\
-& s.t. \quad  \Vert \bm{y}^{(k)} = 1 \quad for \quad \forall k\\
+& s.t. \quad  \Vert \bm{y}^{(k)} \Vert= 1  \quad for \quad \forall k\\
 \end{split}
 \end{equation}
+where $\bm{y}^{(k)}$ represents the $k$-th column of the solution matrix $\bm{Y}$.
 
 
 
@@ -674,24 +676,22 @@ Then finding the data representation $\bm{Y}$ can be consider as an optimization
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Laplacian Eigenmaps}
-\cite{belkin2003laplacian}
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%                     Sammon
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Sammon Mapping}
-
-
-
-
-
+Similar to LLE, the Laplacian Eigenmaps (LE) methods find low-dimensional data representations by preserving manifold's local properties based on pairwise distances of near neighbors.
+LE compute distances between data points with its neighbors using weights based on the rule: the first nearest neighbor contributes more to the cost function than the distance between the datapoint and its second nearest neighbor.
+The minimization of the cost function in LE is defined as an eigen-problem in spectral graph theory.
+ 
+Consider a neighborbood graph $\mathcal{G}$ in which each data sample $\bm{x}_i$ is connected to its $k$ nearest neighbors.
+The weights of the edges are computed using Gaussian kernel function:
+\begin{equation}
+w_{ij} = e^{-\frac{\Vert \bm{x}_i - \bm{x}_j \Vert^2}{2\sigma^2}}
+\end{equation}
+where $\sigma$ indicates the Gaussian variance.
+Then we can get a sparse adjacency matrix $\bm{W}$, and the optimization problem:
+\begin{equation}
+\argmin \sum_{ij} \Vert\bm{y}_i - \bm{y}_j \Vert^2 w_{ij}
+\end{equation}
+Large weights $w_{ij}$ correspond to small distances of $\bm{x}_i$ and $\bm{x}_j$, then the difference between their manifold representation $\bm{y}_i$ and $\bm{x}_j$ highly contributes to the cost function.
+So the nearby points in the original space (high-dimensional) are put as close as possible in the low-dimensional manifold, which forms a better representation for input datasets \cite{belkin2003laplacian}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -700,6 +700,16 @@ Then finding the data representation $\bm{Y}$ can be consider as an optimization
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Multilayer Autoencoder}
 
+\lipsum[1-4]
+
+%Different from the former methods
+
+
+%Multilayer autoencoders are feed-forward neural networks with a certain number of hidden layers.
+
+%Since the SAE based deep structure was capable of extracting representations for the raw inputs, it is simpler and more convenient to extract the features for ECG classification instead of discovery or create features by researchers. Thought it should be mentioned that for clinical reasons some features from the researchers might be great of importance, the features were limited in the morphology aspect, which lacks the ability to use some importance features in the transform-domain features or statistical representations. Another motivation for the deep features was, in the real use of the long-term ECG monitoring, the variances of the data collection devices and the difference in different objects. For example, different Holter manufactories use different collecting chips, or different analog-to-digital sampling rate, or even different digital signal filter parameters. Another factor is the physiological differences of the objects. According to these factors, using the single morphology or time domain features were insufficient, the probability distribution of a certain class is non-exclusive and has variations over multiple directions in the feature space, which makes it impossible to analyze the waveform point by point in the real complicated situation. More robust and invariant features should be extracted and used in the auto-analysis scenes. It is believed that deep architectures can potentially lead to progressively more abstract features at higher layers of the feature, and more abstract features are invariant to most local changes of the input\cite{bengio2013representation}.
+
+%To tackle with these problems, with the stacked autoencoder model the deep invariant features of raw ECG samples can be learned layer by layer. Same as the traditional learning systems, after the feature extracting process, a classifier would be constructed behind the neural network to finish the classification task.
 
 
 
@@ -709,44 +719,156 @@ Then finding the data representation $\bm{Y}$ can be consider as an optimization
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Classifier Adopted}
+\subsection{The Arrhythmia Classification Problem with Softmax Classifier}
+After the manifold embedding procedure for the input $\mathcal{X} = \{\bm{x}_i\}$, we get the data features  $\mathcal{Y} = \{\bm{y}_i\}$ on manifold, with a cascade classifier the arrhythmia classification could be accomplished.
+
+The softmax function is a generalization of the logistic function which had been widely used as a muli-class classifier or the last layer of neural networks \cite{christopher2006pattern}.
+In probability theory, the outputs can represent categorical distribution over $k$ possible outcomes.
+We use softmax regression as the classifier using the manifold representations as the training samples for the classifier, and then deal the test dataset using the same embedding methods.
+The whole task can be illustrated as two phases, the learning phase and the predict(classifying) phase.
+In the learning phase, first the ECG samples are embedded into some manifold to get correspond features with dimensional reduction methods as we illustrated in Section II.A to Section II.G.
+After the embedding, the achieved  features are used for training a softmax based classifier in a supervised learning method. 
+In the prediction phase use the same strategy to get embedded features, and the class label for arrhythmia analysis can be achieved by the trained softmax classifier.
+ 
+Mathematically, let $\{\bm{c}_i\}$ illustrated the class label, $\mathcal{X} = \{\bm{x}_i\}$ as input data, and  $\mathcal{Y} = \{\bm{y}_i\}$ the manifold feature.
+Let $1\{\cdot\}$be the indicator function, so that $\bm{1}\{true \quad statement\} = 1$, and $\bm{1}\{false \quad statement\} = 0$. 
+Then the cost function for the softmax regression classifier between the ground truth label $c^{(i)}$ and the estimated label $g(\bm{y}^{(i)}, \bm{\theta})$ is computed by loss function L:
+\begin{equation}
+J(\bm{\theta}) = \frac{1}{n}\sum_{i=1}^nL(c^{(i)}, g(\bm{y}^{(i)}, \bm{\theta})) + \lambda r(\bm{\theta})
+\end{equation}
+where the loss function of $\bm{y}^{(i)}$ is defined as:
+\begin{equation}
+L(c^{(i)}, g(\bm{y}^{(i)}, \bm{\theta})) = -\sum_{k=1}^K\bm{1}\{c^{(i)} = k\} \log \frac{e^{\bm{\theta}_k^T\bm{y}^{(i)}}}{\sum_{c=1}^Ke^{\bm{\theta}_k^T\bm{y}^{(i)}} }
+\end{equation}
+while the regularization term we use is
+\begin{equation}
+r(\bm{\theta}) = \frac{1}{2} \sum_{k=1}^K\sum_{j=1}^d \bm{\theta}_{kj}^2
+\end{equation}
+It is well-known that softmax regression is a convex model which can find a global optimal solution \cite{ren2017robust}.
 
 
 
+\section{Experiments And Results}
+We include the above mentioned methods for the ECG arrhythmia classification task for a comparative study for an illustration of manifold learning in time series based biomedical signal analysis.
+In this section we first make a short description about the task and data types since this problem had been quite well discussed in related literatures, after which the experiment flows are illustrated.
+
+
+%While the autoencoder based method 
+\subsection{ECG Arrhythmia \& Heartbeat Classification}
+
+After the segmentation for the ECG records, we got plenty of ECG waveform samples with variety categories. 
+Since different physiological disorder may be reflected on the different type of abnormal heartbeat rhythms. 
+For the task of classification, it is quite important to determine the classes would be used. 
+In the early literatures, there were no unified class labels for an ECG classification problem. 
+The MIT-BIH Arrhythmia Database was the first available set of standard test material for evaluation of arrhythmia detectors; it played an important role in stimulating manufacturers of arrhythmia analyzers to compete by objectively measurable performance. 
+The annotations in the open database for the ECG categories adopted the ANSI/AAMI EC57: 1998/(R)2008 standard AAMI (2008), which recommended to group the heartbeats into five classes: on-ectopic beats (N); supraventricular ectopic beat (S); ventricular ectopic beat (V); fusion of a V and a N (F); unknown beat type (Q). These classes or labels have been widely used in the ECG classification tasks. 
+The normal beat, supraventricular ectopic beat and the ventricular ectopic beat categories were used much more frequently while the unknown beat type were abandoned because of its clinical valueless.
+
+The most popular dataset used in arrhythmia analysis task is the MIT-BIH Arrhythmia Database [23] which contains 48 half-hour recordings each containing two 30-min ECG lead signals (lead I and lead II), sampled at 340Hz. 
+However, only the lead I was used in this study. 
+In agreement with the AAMI recommended practice, the four recordings with paced beats were removed from the analysis. 
+
+Besides, a unlabelled data set of ambulatory electrocardiography were used in this study, which includes recordings of 100 subjects with partial arrhythmia ECG samples. 
+This dataset would be used in the autoencoder pre-training, which has been quite popular in the deep learning literatures.
+Even though we explore autoencoder method from a manifold angle, a pre-training procedure is powerful strategy in extracting manifold representations for arrhythmia analysis.
 
 
 
-
-
-\section{Material And Experiments}
-\subsection{Data Collection}
-As for the signal acquiring process, different kinds of sample rates might be involved, for common ECG acquisition device the sample rate would be 128Hz, 250Hz, 340Hz or 500Hz even higher. 
-In murine studies, a sampling rate as high as 2kHz is considered sufficiently.
-Arbitrary resizing would be an ideal procedure to handle with the different sampling rate from a different data source to build the datasets for analysis, which would be adopted in the experiment to keep data consistency.
-
-
-\subsection{ECG Arrhythmia}
-After the segmentation for the ECG records, we got plenty of ECG waveform sam- ples with variety categories. Since different physiological disorder may be reflected on the different type of abnormal heartbeat rhythms. For the task of classification, it is quite important to determine the classes would be used. In the early liter- ature, there were no unified class labels for an ECG classification problem. The MIT-BIH Arrhythmia Database was the first available set of standard test material for evaluation of arrhythmia detectors; it played an important role in stimulating manufacturers of arrhythmia analyzers to compete by objectively measurable per- formance. The annotations in the open database for the ECG categories adopted the ANSI/AAMI EC57: 1998/(R)2008 standard AAMI (2008), which recommended to group the heartbeats into five classes: on-ectopic beats (N as the Figure ?? (a)); supraventricular ectopic beat (S as the Figure ?? (b)); ventricular ectopic beat (V as the Figure ?? (c) and (d)); fusion of a V and a N (F); unknown beat type (Q). These classes or labels have been widely used in the ECG classification tasks re- lated literature (Table ?? illustrated). The normal beat, supraventricular ectopic beat and the ventricular ectopic beat categories were used much more frequently while the unknown beat type were abandoned because of its clinical valueless.
-
-
-\subsection{Data Source}
-Data from the ambulatory electrocardiography database were used in this study, which includes recordings of 100 subjects with arrhythmia along with normal sinus rhythm. The database contains 100 recordings, each containing a 3- lead 24-hour long electrocardiography which were bandpass filtered at 0.1-100Hz and sampled at 128Hz. In this study, only the lead I data were adapted after preprocessing in the classification task. The reference average heart beats for each sample has 97,855 beats for the 24-hour long recording, and the reference arrhythmia average is 1,810 beats which were estimated by a commercial software (this statistics aim to indicate the existence for arrhythmia samples, which should not be consider as a experiment preset).
-The MIT-BIH Arrhythmia Database [23] contains 48 half- hour recordings each containing two 30-min ECG lead signals (lead A and lead B), sampled at 360Hz. As well only the lead I data were used in the proposed method. In agreement with the AAMI recommended practice, the four recordings with paced beats were removed from the analysis. Five records randomly selected were used to verify the real time application. The remaining recordings were divided into two datasets, with small part of which were used as the training set of the fine-tuning process.
-The MIT-BIT Long-term Database is also used in this study for training and verification, which contains 7 long-term ECG recordings (14 to 22 hours each), with manually reviewed beat annotations and sampled at 128Hz. Similarly, the 7 recordings were divided into two datasets, with part used as the fine-tuning training set. A description of the labelled datasets are illustrated in Table 1 .
 
 \subsection{Data Preprocessing}
-Similar to the routine of electrocardiography classification task, the workflow con- sists of the stages of prepossessing, processing and the classifying. The prepossessing stage related technologies are not the focus of this study, so the classical methods for prepossessing were adapted, and just a brief introduction of the details would be mentioned.
-In the preprocessing stage, filtering algorithms were adapted to remove the arte- fact signals from the ECG signal. The signals include baseline wander, power line interference, and high-frequency noise. For the unlabelled database of ambulatory ECG and the MITBIH LT database, the Lead I data were extracted and a resample from 128Hz to 360Hz procedure was adopted for data consistency.
-Before the segmentation procedure from the long-time monitoring ECG signals- Heartbeat Detection: For the heartbeat detection, the MIT-BIH database and un- labelled database, the positions of R waves are determined. The provided fiducial points of R wave had been used as the basis of wave segmentation. The details of the implementation of R wave detection would not be described in this study, and a reference for the R wave detection algorithms had been explored in [58].
-In the heartbeat segmentation process, the segmentation program of Laguna [59] was adapted, which also had been validated by other related work [2]. The segmentation process was focus on the Lead I of the recordings. After the segmentation for the ambulatory ECG database, three parts of heartbeat samples listed in Table 1 were acquired for the classification task. As for the pretraining, fine-tuning for our proposed task and comparison, we divided all the samples into three groups: the pretraining group as dataset A, the fine-tuning group as dataset B and test group as dataset C (illustrated in Table 2). Samples are chosen randomly from the original AR and LT database, the details of the sample class would be described in the experiment result analysis. As the algorithm of the deep structure training illustrated, both unsupervised learning and supervised learning are involved in the training process. The pre-training mainly used the unlabelled data to train the autoencoder parts, which only need to set the outputs equal to the inputs. Training data adopted in the unsupervised learning step include the whole samples from the ambulatory electrocardiography database and parts of the MIT-BHI database samples. In the supervised learning step, the MIT-BHI database samples with labels were adopted.
+In the preprocessing stage, filtering algorithms were adapted to remove the artifact signals from the ECG signal. 
+The signals include baseline wander, power line interference, and high-frequency noise. 
+The segmentation and R wave detection algorithms had been explored in \cite{afonso} and segmentation program of Laguna \cite{sornmo2006electrocardiogram} was adapted, which also had been validated by other related work \cite{chaza}. 
+After segmentation, the data samples become $340$-dimensional time series.
 
-\subsection{Manifold Embedding Methods}
+\subsection{Intrinsic Dimension Analysis}
+The dimension of the embedding is a key parameter for manifold feature achieving.  
+If the dimension is too small, important data features are "collapsed", meanwhile if the dimension is too large, the projection into a manifold is too large, leading to a noisy or unstable data feature.
+When performing the manifold learning methods, the learning parameter settings could be quite arbitrary sometimes.
+The intrinsic dimension analysis could help for the parameter determination.
+Especially in the neural network based autoencoder, there is an insufficiency of method for determining the dimension for output layer.
+Intrinsic dimension analysis provide a reasonable method for parameter determination.
 
-\subsection{Autoencoder Based Feature Extraction}
+The widely adopted method of intrinsic dimension analysis include correlation dimension estimation, nearest neighbor dimension estimation\cite{costa2005estimating}, geodesic minimum spanning tree\cite{costa2004geodesic}, packing numbers \cite{kegl2003intrinsic}, maximum likelihood estimation method \cite{levina2005maximum}, etc.
+Here we use the the maximum likelihood estimation method for intrinsic dimension analysis.
+The dimension from the input dimension turns to $14$ with the maximum likelihood estimation based intrinsic dimension analysis.
 
 
-\section{Results and Discussion}
+\subsection{Sample Imbalanced Treatment}
+For the arrhythmia analysis, a typical problem from the viewpoint of data analysis is the unbalancedness of data.
+It is due to the characters from the cardiac physiological activity.
+Even for some severe heart disease, the ECG achieved would include much more normal beats than the arrhythmia beats after segmentation.
+The unbalancedness property could always bring a high accuracy in a multi-class classification problem.
+Usually, a confusion matrix had been build for the performance assess to prove the validity of proposed methods.
+However, here we try to
 
+
+\cite{he2009learning}
+
+
+\subsection{Manifold Embedded}
+\subsubsection{PCA}
+
+
+\lipsum[1]
+
+\subsubsection{Kernel PCA}
+
+
+\lipsum[1]
+
+
+\subsubsection{Maximum Variance Unfolding}
+
+\lipsum[1]
+
+
+\subsubsection{Isomap}
+
+\lipsum[1]
+
+\subsubsection{LLE}
+
+\lipsum[1]
+
+\subsubsection{Laplacian Eigenmaps}
+
+\lipsum[1]
+
+\subsubsection{Autoencoder}
+
+\lipsum[1-2]
+
+
+%\begin{figure*}[htb!]
+%\centering
+%\includegraphics[width=3 in]{EPS/test.eps}
+%\caption{xxx}
+%\label{figure2}
+%\end{figure*}
+
+
+
+
+\subsection{Classification For Arrhythmia Analysis}
+\lipsum[1]
+
+\subsection{Feature and Performance Analysis}
+
+\lipsum[1]
+
+
+
+
+
+\section{Discussion}
+
+
+
+\lipsum[1]
+
+
+\lipsum[1]
 
 
 
@@ -867,8 +989,6 @@ In the heartbeat segmentation process, the segmentation program of Laguna [59] w
 
 
 \appendices
-\section{Proof of the First Zonklar Equation}
-\lipsum[1-3]
 % you can choose not to have a title for an appendix
 % if you want by leaving the argument blank
 \begin{algorithm}
@@ -936,29 +1056,28 @@ This work was supported by the National Natural Science Foundation of China, Gra
 %\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
 % or if you just want to reserve a space for a photo:
 
-\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{YY.pdf}}]{Yan Yan}
-received the B.Eng. degree and the MSc in Instrument Engineering at the Harbin Institute of Technology in 2010 and 2012 respectively. 
-He worked as research assistance at the Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences from 2012 to 2014. 
-He is working on his PhD in Computer Science started from 2014.
-His research interests are digital signal processing, machine learning, and control system.
-\end{IEEEbiography}
+%\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{YY.pdf}}]{Yan Yan}
+%received the B.Eng. degree and the MSc in Instrument Engineering at the Harbin Institute of Technology in 2010 and 2012 respectively. He worked as research assistance at the Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences from 2012 to 2014. He is working on his PhD in Computer Science started from 2014.His research interests are digital signal processing, machine learning, and control system.
+%\end{IEEEbiography}
 
-\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{WL.pdf}}]{Lei Wang}
-received the B.Eng. degree in information and control engineering, and the Ph.D. degree in biomedical engineering from Xi’an Jiaotong University, Xi’an, China, in 1995 and 2000, respectively. He was with the University of Glasgow, Glasgow, U.K., and Imperial College London, London, U.K., from 2000 to 2008. He is currently a full professor with the Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences, Shenzhen, China. He has published over 200 scientific papers, authored four book chapters, and holds 60 patents. His current research interests include body sensor network, digital signal processing, and biomedical engineering
-\end{IEEEbiography}
+%\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{WL.pdf}}]{Lei Wang}
+%received the B.Eng. degree in information and control engineering, and the Ph.D. degree in biomedical engineering from Xi’an Jiaotong University, Xi’an, China, in 1995 and 2000, respectively. He was with the University of Glasgow, Glasgow, U.K., and Imperial College London, London, U.K., from 2000 to 2008. He is currently a full professor with the Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences, Shenzhen, China. He has published over 200 scientific papers, authored four book chapters, and holds 60 patents. His current research interests include body sensor network, digital signal processing, and biomedical engineering
+%\end{IEEEbiography}
 
 % if you will not have a photo at all:
-%\begin{IEEEbiographynophoto}{John Doe}
-%%Biography text here.
-%\end{IEEEbiographynophoto}
+
+\begin{IEEEbiographynophoto}{Yan Yan}
+received the B.Eng. degree and the MSc in Instrument Engineering at the Harbin Institute of Technology in 2010 and 2012 respectively. He worked as research assistance at the Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences from 2012 to 2014. He is working on his PhD in Computer Science started from 2014.His research interests are digital signal processing, machine learning, and control system.
+\end{IEEEbiographynophoto}
+
+\begin{IEEEbiographynophoto}{Lei Wang}
+received the B.Eng. degree in information and control engineering, and the Ph.D. degree in biomedical engineering from Xi’an Jiaotong University, Xi’an, China, in 1995 and 2000, respectively. He was with the University of Glasgow, Glasgow, U.K., and Imperial College London, London, U.K., from 2000 to 2008. He is currently a full professor with the Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences, Shenzhen, China. He has published over 200 scientific papers, authored four book chapters, and holds 60 patents. His current research interests include body sensor network, digital signal processing, and biomedical engineering
+\end{IEEEbiographynophoto}
+
 
 % insert where needed to balance the two columns on the last page with
 % biographies
 %\newpage
-
-%\begin{IEEEbiographynophoto}{Jane Doe}
-%Biography text here.
-%\end{IEEEbiographynophoto}
 
 % You can push biographies down or up by placing
 % a \vfill before or after them. The appropriate
