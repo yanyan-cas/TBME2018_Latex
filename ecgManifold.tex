@@ -72,6 +72,8 @@
  \renewcommand{\algorithmicensure}{\textbf{Output:}}
 
 \usepackage{lipsum}
+
+\usepackage{threeparttable}
 % Some very useful LaTeX packages include:
 % (uncomment the ones you want to load)
 
@@ -370,7 +372,7 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Exploring Manifold Learning Methods For Automated Arrhythmia Analysis}
+\title{Exploring Manifold Learning For Automated Electrocardiography Arrhythmia Analysis}
 
 %
 %
@@ -444,13 +446,14 @@
 % As a general rule, do not put math, special symbols or citations
 % in the abstract or keywords.
 \begin{abstract}
-\lipsum[1]
-\lipsum[1]
+Arrhythmia analysis had been a classical research topic for decades. The various and changing morphologic features in the time series brought challenges for automated analysis. A geometrical descriptor for the time series is the mapping from the original input into some manifold. In this work, we investigate several manifold learning methods for electrocardiography embeddings, using the learned manifold features for arrhythmia analysis.  
+The manifold methods have been validated on the MIT-BIH Arrhythmia Database. The intrinsic dimension analysis and the imbalance problem of electrocardiography dataset have been experimented and discussed.
+The proposed experiments shows that the multi-layer autoencoder generates a better representations than the other geometrical rule based manifold learning methods.
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
 \begin{IEEEkeywords}
-IEEE, IEEEtran, journal, \LaTeX, paper, template.
+Manifold Learning, Arrhythmia, ECG Classification, Machine Learning
 \end{IEEEkeywords}
 
 
@@ -496,9 +499,7 @@ However, the increasingly developing of the artificial intelligence domain and m
 
 
 
-
-
-Lots of algorithms had been proposed for the classification and detection of electrocardiography signals. 
+Lots of machine learning algorithms had been proposed for the classification and detection of electrocardiography signals. 
 The electrocardiography classification or detection task had been divided into two parts: the feature extraction process and classifier. 
 Simple classifier such as linear discriminants \cite{chaza} and kNN \cite{melgan}, more complex classifiers like neural networks \cite{jiang, olmez, lin, osowski}, fuzzy inference engines \cite{osowski, kundu}, hidden Markov model \cite{andreao, coast}, independent component analysis \cite{zhu} and support vector machine  \cite{melgan, kampoura, khandoker} were also adopted by lots of researchers.  
 
@@ -525,10 +526,9 @@ Manifold learning is a kind of method attempting to uncover the manifold structu
 It has been widely used in multivariate data classification, data analysis, and data visualization.
 Manifold learning directly map the input data space into some feature space to find a better descriptor to analysis the real world problems. 
 
+Manifold learning directly map the input data space into some feature space to find a better descriptor to analysis the real world problems. 
+Manifold learning directly map the i
 
-
-
-\lipsum[1-3]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %                     SECTION III: Methodology
@@ -698,20 +698,33 @@ So the nearby points in the original space (high-dimensional) are put as close a
 %                     SAE
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Multilayer Autoencoder}
+\subsection{Autoencoder}
+While the above methods are based on some geometrical explantations, Auto Encoders are a family of nonlinear dimensional reduction methods.
+Autoencoders are neural networks had been used and explained in the term deep learning where had been used to predict the input by let the output is trained to be as similar as possible as the input.
+The structure of autoencoders are illustrated in Figure \ref{figauto}, on the end of autoencoder there were less hidden nodes than input nodes by encoding as much information as it can be for the hidden neural nodes. 
+Superficially high-dimensional and complex phenomena can be mapped into some lower dimensional manifold, performs good representation of inputs.
+ 
+\begin{figure}[!t]
+\centering
+\label{figauto}
+\includegraphics[width=3.5in]{autoencoder.pdf}
+\caption{A Multi-layer Autoencoder Reconstruction Structure}
+\label{fig_sim}
+\end{figure}
 
-\lipsum[1-4]
+Suppose the input $\mathcal{X} = \{\bm{\hat{x}}_i\}$ and the learned autoencoder based manifold $\mathcal{Y} = \{\bm{y}_i\}$. The autoencoder structure is constructed with an $a$-layer neural network in which the output $h_{W, b}(\bm{x}) $ equals to the input $\bm{x} = (\bm{\hat{x}}_1, \bm{\hat{x}}_2, \ldots, \bm{\hat{x}}_n)^T$. Let an autoencoder parameters are $\bm{W}$ and $\bm{b}$, and $f, g$ were encoder and decoder respectively. 
+The output of autoencoder is:
+\begin{equation}
+h_{\bm{W}, \bm{b}}(\bm{\hat{x}}) = g(f(\bm{\hat{x}})) \approx \bm{\hat{x}}
+\end{equation}
+Then the training of the autoencoder can be consider as a problem of:
 
-%Different from the former methods
+\begin{equation}
+\argmin_{\bm{W}, \bm{b}} \frac{1}{2} \Vert h_{\bm{W}, \bm{b}}(\bm{\hat{x}}) - \bm{\hat{x}} \Vert^2
+\end{equation}
+This multi-layer neural network structure can be trained using the backpropagation method in a unsupervised way. In deep learning literatures a layer-wised method had been widely used as \cite{Bengio2009deeplearning} illustrated.
 
-
-%Multilayer autoencoders are feed-forward neural networks with a certain number of hidden layers.
-
-%Since the SAE based deep structure was capable of extracting representations for the raw inputs, it is simpler and more convenient to extract the features for ECG classification instead of discovery or create features by researchers. Thought it should be mentioned that for clinical reasons some features from the researchers might be great of importance, the features were limited in the morphology aspect, which lacks the ability to use some importance features in the transform-domain features or statistical representations. Another motivation for the deep features was, in the real use of the long-term ECG monitoring, the variances of the data collection devices and the difference in different objects. For example, different Holter manufactories use different collecting chips, or different analog-to-digital sampling rate, or even different digital signal filter parameters. Another factor is the physiological differences of the objects. According to these factors, using the single morphology or time domain features were insufficient, the probability distribution of a certain class is non-exclusive and has variations over multiple directions in the feature space, which makes it impossible to analyze the waveform point by point in the real complicated situation. More robust and invariant features should be extracted and used in the auto-analysis scenes. It is believed that deep architectures can potentially lead to progressively more abstract features at higher layers of the feature, and more abstract features are invariant to most local changes of the input\cite{bengio2013representation}.
-
-%To tackle with these problems, with the stacked autoencoder model the deep invariant features of raw ECG samples can be learned layer by layer. Same as the traditional learning systems, after the feature extracting process, a classifier would be constructed behind the neural network to finish the classification task.
-
-
+Once the architecture parameters of $\bm{W}, \bm{b}$ are learned, one can use the last layer of encoder as the output. From the view point of manifold learning, the autoencoder mapped the original input into a manifold feature space. One can use the manifold feature for further classification problem.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -719,7 +732,7 @@ So the nearby points in the original space (high-dimensional) are put as close a
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{The Arrhythmia Classification Problem with Softmax Classifier}
+\subsection{Arrhythmia Classification with Softmax Classifier}
 After the manifold embedding procedure for the input $\mathcal{X} = \{\bm{x}_i\}$, we get the data features  $\mathcal{Y} = \{\bm{y}_i\}$ on manifold, with a cascade classifier the arrhythmia classification could be accomplished.
 
 The softmax function is a generalization of the logistic function which had been widely used as a muli-class classifier or the last layer of neural networks \cite{christopher2006pattern}.
@@ -744,8 +757,22 @@ while the regularization term we use is
 \begin{equation}
 r(\bm{\theta}) = \frac{1}{2} \sum_{k=1}^K\sum_{j=1}^d \bm{\theta}_{kj}^2
 \end{equation}
-It is well-known that softmax regression is a convex model which can find a global optimal solution \cite{ren2017robust}.
+It is well-known that softmax regression is a convex model which can find a global optimal solution \cite{ren2017robust}, then the training for the classifier is:
+\begin{equation}
+\bm{\theta} = \argmin J(\bm{\theta})
+\end{equation}
+The class label output of the softmax classifier can be achieved via:
+\begin{equation}
+c_i = \argmax g(\bm{y}^{(i)}, \bm{\theta}) 
+\end{equation}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%                     Experiments and Results
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \section{Experiments And Results}
@@ -753,6 +780,12 @@ We include the above mentioned methods for the ECG arrhythmia classification tas
 In this section we first make a short description about the task and data types since this problem had been quite well discussed in related literatures, after which the experiment flows are illustrated.
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%                     ECG Arrhythmia \& Heartbeat Classification
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %While the autoencoder based method 
 \subsection{ECG Arrhythmia \& Heartbeat Classification}
 
@@ -774,13 +807,24 @@ Even though we explore autoencoder method from a manifold angle, a pre-training 
 
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%                     Data Preprocessing
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Data Preprocessing}
 In the preprocessing stage, filtering algorithms were adapted to remove the artifact signals from the ECG signal. 
 The signals include baseline wander, power line interference, and high-frequency noise. 
 The segmentation and R wave detection algorithms had been explored in \cite{afonso} and segmentation program of Laguna \cite{sornmo2006electrocardiogram} was adapted, which also had been validated by other related work \cite{chaza}. 
 After segmentation, the data samples become $340$-dimensional time series.
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%                     Intrinsic Dimension Analysis
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Intrinsic Dimension Analysis}
 The dimension of the embedding is a key parameter for manifold feature achieving.  
 If the dimension is too small, important data features are "collapsed", meanwhile if the dimension is too large, the projection into a manifold is too large, leading to a noisy or unstable data feature.
@@ -794,85 +838,387 @@ Here we use the the maximum likelihood estimation method for intrinsic dimension
 The dimension from the input dimension turns to $14$ with the maximum likelihood estimation based intrinsic dimension analysis.
 
 
-\subsection{Sample Imbalanced Treatment}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%                     Sample Imbalance Treatment
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Sample Imbalance Treatment}
 For the arrhythmia analysis, a typical problem from the viewpoint of data analysis is the unbalancedness of data.
 It is due to the characters from the cardiac physiological activity.
 Even for some severe heart disease, the ECG achieved would include much more normal beats than the arrhythmia beats after segmentation.
-The unbalancedness property could always bring a high accuracy in a multi-class classification problem.
+The skewed distribution makes manifold learning algorithms less effective, especially in the prediction of minority class samples.
 Usually, a confusion matrix had been build for the performance assess to prove the validity of proposed methods.
-However, here we try to
+Here we arbitrarily delete part of the data sample to relieve the imbalance problem, and use the confusion matrix to evaluate the classification performance. 
+The class distributions are illustrated in Table \ref{distriofData}, a more complicate and detailed analysis of impact for imbalance impact can be found in \cite{wang2012multiclass} and more about two-class situation in \cite{he2009learning}.
 
 
-\cite{he2009learning}
+
+\begin{table}[!htbp]
+\begin{center}
+\begin{threeparttable}
+\caption{Comparisons Of Imbalanced And Balanced Of DS-I From MITBHI-AR}
+\label{table1}
+\begin{tabular}{ccccccc}
+\hline
+& Classes & N & S & V & F & Q \\
+\hline
+& Imbalanced  &90431  & 2774  & 7698 & 802  &8023\\
+& Ratio & 82.4\%&  2.5\%& 7\% &  0.7\% & 7.3\% \\
+\hline
+& Balanced  & 18086 & 2774  & 7698 & 802 & 8023         \\
+& Ratio & 48.38\%&  7.5\%& 20\% &  2.2\% & 21.5\% \\
+\hline
+\end{tabular}
+\end{threeparttable}
+\end{center}
+\end{table}
+     
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%                
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     
+     
+     
+\subsection{Manifold Learning and Classification}
+The first step for the arrhythmia classification problem is mapping the data into some manifold to gain related data embedding. It can be considered as some feature extraction, or representation learning in the machine learning literatures.
+The difference was that these manifold based methods are inspired from some geometrical concepts.
+For the mentioned methods, the PCA, kernel based PCA, MVU, Isomap, LLE, Laplacian Eigenmaps only involve the MIT-BIH-AR data samples for geometrical transformation, in the autoencoder based manifold learning, we use some unlabelled data to train a multilayer neural network in a stacked manner.
+
+As Algorithm \ref{alg1} illustrated, let $\mathcal{M}$ illustrated some mapping method with rule $\mathcal{R}$, and the related softmax classifier as $\mathcal{S}$, consider the balanced dataset as DS1 (from the MIT-BHI AR database). 
+
+\begin{algorithm}
+ \caption{Manifold Learning With Rule $\mathcal{R}$}
+ \label{alg1}
+ \begin{algorithmic}
+ \REQUIRE Data Set I (DS-I) Samples: $ \mathcal{X} = \{\bm{x}_1, \bm{x}_2, \ldots, \bm{x}_n\}$;
+ \ENSURE Sample Classes: $\mathcal{C} = \{c_1, c_2, \ldots, c_3\}$
+ \STATE $TrainSet, TestSet \leftarrow \mathcal{X}$
+ \STATE $\mathcal{M} \leftarrow $ Process $TrainSet$ with criteria $\mathcal{R}$
+ \STATE $\mathcal{Y} \leftarrow$ Map $TrainSet$ with $\mathcal{M}$ 
+ \STATE $\mathcal{S} \leftarrow$ Train the Softmax classifier with $\mathcal{Y}$
+ \STATE $\mathcal{C} \leftarrow \mathcal{S}, \mathcal{M}(TestSet)$
+  \end{algorithmic}
+ \end{algorithm}
 
 
-\subsection{Manifold Embedded}
-\subsubsection{PCA}
+As Algorithm \ref{alg2} illustrated, consider the multilayer autoencoder method, the random initialization of the neural network parameter might fail with the limited data samples in DS-I. Then we first use the unlabelled data set DS-II with the same preprocessing method to pre-train the neural network, it had been widely used in deep learning method \cite{vincent2010stacked, goodfellow2016deep}. 
+After the pre-training state, we use samples to do further training for the representation, and the cascade classification.
+A $5$-fold cross validation had been applied for the whole training and predict, refer \cite{kohavi1995study} for detail.
+
+
+\begin{algorithm}
+ \caption{Manifold Learning With Autoencoder}
+ \label{alg2}
+ \begin{algorithmic}
+ \REQUIRE Data Set I (DS-I) Samples: $ \mathcal{X} = \{\bm{x}_1, \bm{x}_2, \ldots, \bm{x}_n\}$; \\$\quad \quad $Data Set II (DS-II) Samples: $\hat{\mathcal{X}} = \{\bm{\hat{x}}_1, \bm{\hat{x}}_2, \ldots, \bm{\hat{x}}_n\}$
+ \ENSURE Sample Classes: $\mathcal{C} = \{c_1, c_2, \ldots, c_n\}$
+ \STATE $\bm{\theta} \leftarrow $ self-reconstruction of $\mathcal{\hat{X}}$
+  \STATE $TrainSet, TestSet \leftarrow \mathcal{X}$
+  \STATE $\mathcal{Y} \leftarrow$ Map $TrainSet$ with encoder parameters $\bm{\theta}$ 
+ \STATE $\mathcal{S} \leftarrow$ Train the Softmax classifier with $\mathcal{Y}$
+ \STATE $\mathcal{C} \leftarrow \mathcal{S}, \bm{\theta}, TestSet$
+  \end{algorithmic}
+ \end{algorithm}
+
+ 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%       Performance Analysis              
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Performance Analysis}
+Correctly detected episodes are termed true positive (TP) episodes, while the missed as false negatives (FNs).
+When a negative episode in some class is predicted as true is called true negative, and a false positive (FP) if it is considered as positive. And the sensitivity(Se), specificity(Sp),  Precision, and F score are defined as following with respectively:
+\begin{equation}
+\begin{split}
+Se = \frac{TP}{TP+FN} \quad Sp = \frac{TN}{TN+FP}\\
+Precision = \frac{TP}{TP + FP}\\
+F1-Score = \frac{2TP}{2TP+FP+FN}
+\end{split}
+\end{equation}
+Refer \cite{mar} for an further knowledge for parameters for algorithm evaluation in ECG data analysis.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%                     Results and Discussion
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Results and Discussion}
+Using the projectors from Section II, we use the time series based manifold feature to perform classification task. Since the working
+
+
+
+\subsection{Experimental Results}
+
+\lipsum[1]
+
+\begin{table}[!htbp]
+\begin{center}
+\begin{threeparttable}
+\caption{Test Result for 4-Hidden-Layer Autoencoder Network}
+\label{table7}
+\begin{tabular}{cccccccc}
+\hline
+\multicolumn{6}{r}{Algorithm label} \\
+\cline{3-7}
+		&  & N & S      & V    & F     & Q   & T\\
+\hline
+ Reference & N & 41,778 &  38  &  48   & 17  & 5  &  41,886 \\
+	label  & S &  93    & 460  &   3   & 1   & 2  &  559\\
+		   & V &  52    & 1    & 4,067 & 11  & 6  &  4,137\\
+		   & F &  15    & 0    & 13    & 214 & 2  &  244\\
+		   & Q &  1     & 0    & 1     & 1   & 1  &  5\\
+\hline
+\end{tabular}
+\begin{tablenotes}
+\item The test accuracy is about $99.34\%$.
+\end{tablenotes}
+\end{threeparttable}
+\end{center}
+\end{table}
+
+
+\lipsum[2]
+
+
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=3.8 in]{eps/test.pdf}
+ where an .eps filename suffix will be assumed under latex, 
+ and a .pdf suffix will be assumed for pdflatex; or what has been declared
+ via \DeclareGraphicsExtensions.
+\caption{Simulation results for the network.}
+\label{fig_sim}
+\end{figure}
 
 
 \lipsum[1]
 
-\subsubsection{Kernel PCA}
 
 
-\lipsum[1]
-
-
-\subsubsection{Maximum Variance Unfolding}
-
-\lipsum[1]
-
-
-\subsubsection{Isomap}
-
-\lipsum[1]
-
-\subsubsection{LLE}
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=3.8 in]{eps/test.pdf}
+ where an .eps filename suffix will be assumed under latex, 
+ and a .pdf suffix will be assumed for pdflatex; or what has been declared
+ via \DeclareGraphicsExtensions.
+\caption{Simulation results for the network.}
+\label{fig_sim}
+\end{figure}
 
 \lipsum[1]
 
-\subsubsection{Laplacian Eigenmaps}
+\begin{table}[!htbp]
+\begin{center}
+\begin{threeparttable}
+\caption{Test Result for 4-Hidden-Layer Autoencoder Network}
+\label{table7}
+\begin{tabular}{cccccccc}
+\hline
+\multicolumn{6}{r}{Algorithm label} \\
+\cline{3-7}
+		&  & N & S      & V    & F     & Q   & T\\
+\hline
+ Reference & N & 41,778 &  38  &  48   & 17  & 5  &  41,886 \\
+	label  & S &  93    & 460  &   3   & 1   & 2  &  559\\
+		   & V &  52    & 1    & 4,067 & 11  & 6  &  4,137\\
+		   & F &  15    & 0    & 13    & 214 & 2  &  244\\
+		   & Q &  1     & 0    & 1     & 1   & 1  &  5\\
+\hline
+\end{tabular}
+\begin{tablenotes}
+\item The test accuracy is about $99.34\%$.
+\end{tablenotes}
+\end{threeparttable}
+\end{center}
+\end{table}
+
+\lipsum[1]
+\begin{table}[!htbp]
+\begin{center}
+\begin{threeparttable}
+\caption{Test Result for 4-Hidden-Layer Autoencoder Network}
+\label{table7}
+\begin{tabular}{cccccccc}
+\hline
+\multicolumn{6}{r}{Algorithm label} \\
+\cline{3-7}
+		&  & N & S      & V    & F     & Q   & T\\
+\hline
+ Reference & N & 41,778 &  38  &  48   & 17  & 5  &  41,886 \\
+	label  & S &  93    & 460  &   3   & 1   & 2  &  559\\
+		   & V &  52    & 1    & 4,067 & 11  & 6  &  4,137\\
+		   & F &  15    & 0    & 13    & 214 & 2  &  244\\
+		   & Q &  1     & 0    & 1     & 1   & 1  &  5\\
+\hline
+\end{tabular}
+\begin{tablenotes}
+\item The test accuracy is about $99.34\%$.
+\end{tablenotes}
+\end{threeparttable}
+\end{center}
+\end{table}
+\lipsum[1]
+
+\begin{table}[!htbp]
+\begin{center}
+\begin{threeparttable}
+\caption{Test Result for 4-Hidden-Layer Autoencoder Network}
+\label{table7}
+\begin{tabular}{cccccccc}
+\hline
+\multicolumn{6}{r}{Algorithm label} \\
+\cline{3-7}
+		&  & N & S      & V    & F     & Q   & T\\
+\hline
+ Reference & N & 41,778 &  38  &  48   & 17  & 5  &  41,886 \\
+	label  & S &  93    & 460  &   3   & 1   & 2  &  559\\
+		   & V &  52    & 1    & 4,067 & 11  & 6  &  4,137\\
+		   & F &  15    & 0    & 13    & 214 & 2  &  244\\
+		   & Q &  1     & 0    & 1     & 1   & 1  &  5\\
+\hline
+\end{tabular}
+\begin{tablenotes}
+\item The test accuracy is about $99.34\%$.
+\end{tablenotes}
+\end{threeparttable}
+\end{center}
+\end{table}
 
 \lipsum[1]
 
-\subsubsection{Autoencoder}
+\begin{table}[!htbp]
+\begin{center}
+\begin{threeparttable}
+\caption{Test Result for 4-Hidden-Layer Autoencoder Network}
+\label{table7}
+\begin{tabular}{cccccccc}
+\hline
+\multicolumn{6}{r}{Algorithm label} \\
+\cline{3-7}
+		&  & N & S      & V    & F     & Q   & T\\
+\hline
+ Reference & N & 41,778 &  38  &  48   & 17  & 5  &  41,886 \\
+	label  & S &  93    & 460  &   3   & 1   & 2  &  559\\
+		   & V &  52    & 1    & 4,067 & 11  & 6  &  4,137\\
+		   & F &  15    & 0    & 13    & 214 & 2  &  244\\
+		   & Q &  1     & 0    & 1     & 1   & 1  &  5\\
+\hline
+\end{tabular}
+\begin{tablenotes}
+\item The test accuracy is about $99.34\%$.
+\end{tablenotes}
+\end{threeparttable}
+\end{center}
+\end{table}
+
+
+
+
+
+\subsection{Comparisons}
+\subsubsection{Manifold Methods}
+
+\lipsum[1]
+
+\subsubsection{Comparison With Other Works}
+\lipsum[1]
+
+\begin{table}[!htbp]
+\begin{center}
+\begin{threeparttable}
+\caption{Test Result for 4-Hidden-Layer Autoencoder Network}
+\label{table7}
+\begin{tabular}{cccccccc}
+\hline
+\multicolumn{6}{r}{Algorithm label} \\
+\cline{3-7}
+		&  & N & S      & V    & F     & Q   & T\\
+\hline
+ Reference & N & 41,778 &  38  &  48   & 17  & 5  &  41,886 \\
+	label  & S &  93    & 460  &   3   & 1   & 2  &  559\\
+		   & V &  52    & 1    & 4,067 & 11  & 6  &  4,137\\
+		   & F &  15    & 0    & 13    & 214 & 2  &  244\\
+		   & Q &  1     & 0    & 1     & 1   & 1  &  5\\
+\hline
+\end{tabular}
+\begin{tablenotes}
+\item The test accuracy is about $99.34\%$.
+\end{tablenotes}
+\end{threeparttable}
+\end{center}
+\end{table}
+
+
+
+
+\begin{table}[!htbp]
+\begin{center}
+\begin{threeparttable}
+\caption{Performance Comparison For Manifold Learning Methods}
+\label{table1}
+\begin{tabular}{cccccccc}
+\hline
+&  Items & N-Sp & S-Sp & V-Sp & F-Sp & Q-Sp & F-Score \\
+\hline
+& PCA  &90\%)  & 20\%  & 2233 & 122\%  &1222 & 1\\
+
+& KPCA  &2 & 3  & d &d& 111   &1      \\
+
+& MVU  &2 & 3  & d &d& 111   &1      \\
+
+
+& Isompa  &2 & 3  & d &d& 111   &1      \\
+
+
+& LLE  &2 & 3  & d &d& 111   &1      \\
+
+& LE  &2 & 3  & d &d& 111   &1      \\
+
+& SAE  &2 & 3  & d &d& 111   &1      \\
+
+
+\hline
+\end{tabular}
+\end{threeparttable}
+\end{center}
+\end{table}
+     
+     
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%                     Conclusion and Future Work
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Conclusion and Future Work}
 
 \lipsum[1-2]
 
 
-%\begin{figure*}[htb!]
-%\centering
-%\includegraphics[width=3 in]{EPS/test.eps}
-%\caption{xxx}
-%\label{figure2}
-%\end{figure*}
-
-
-
-
-\subsection{Classification For Arrhythmia Analysis}
-\lipsum[1]
-
-\subsection{Feature and Performance Analysis}
-
-\lipsum[1]
 
 
 
 
 
-\section{Discussion}
 
 
 
-\lipsum[1]
 
-
-\lipsum[1]
-
-
-
-\section{Conclusion and Future Work}
 
 
 % An example of a floating figure using the graphicx package.
@@ -888,15 +1234,7 @@ However, here we try to
 % option should be used if it is desired that the figures are to be
 % displayed while in draft mode.
 %
-%\begin{figure}[!t]
-%\centering
-%\includegraphics[width=2.5in]{myfigure}
-% where an .eps filename suffix will be assumed under latex, 
-% and a .pdf suffix will be assumed for pdflatex; or what has been declared
-% via \DeclareGraphicsExtensions.
-%\caption{Simulation results for the network.}
-%\label{fig_sim}
-%\end{figure}
+
 
 % Note that the IEEE typically puts floats only at the top, even when this
 % results in a large percentage of a column being occupied by floats.
@@ -991,20 +1329,11 @@ However, here we try to
 \appendices
 % you can choose not to have a title for an appendix
 % if you want by leaving the argument blank
-\begin{algorithm}
- \caption{Principal Component Analysis}
- \label{alg1}
- \begin{algorithmic}
- \REQUIRE Data Set $ X = [x_1, x_2, \ldots, x_n]^T$
- \ENSURE $y = x^n$
- \STATE $y \leftarrow 1$
-  \end{algorithmic}
- \end{algorithm}
 
 % use section* for acknowledgment
-\section*{Acknowledgment}
-This work was supported by the National Natural Science Foundation of China, Grant No. 71531004.
-
+%\section*{Acknowledgment}
+%The author would like to thank for the reviewer for advices.
+%This work was supported by the National Natural Science Foundation of China, Grant No. 71531004.
 
 
 % Can use something like this to put references on a page
@@ -1056,23 +1385,23 @@ This work was supported by the National Natural Science Foundation of China, Gra
 %\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
 % or if you just want to reserve a space for a photo:
 
-%\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{YY.pdf}}]{Yan Yan}
-%received the B.Eng. degree and the MSc in Instrument Engineering at the Harbin Institute of Technology in 2010 and 2012 respectively. He worked as research assistance at the Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences from 2012 to 2014. He is working on his PhD in Computer Science started from 2014.His research interests are digital signal processing, machine learning, and control system.
-%\end{IEEEbiography}
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{YY.pdf}}]{Yan Yan}
+received the B.Eng. degree and the MSc in Instrument Engineering at the Harbin Institute of Technology in 2010 and 2012 respectively. He worked as research assistance at the Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences from 2012 to 2014. He is working on his PhD in Computer Science started from 2014.His research interests are digital signal processing, machine learning, and control system.
+\end{IEEEbiography}
 
-%\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{WL.pdf}}]{Lei Wang}
-%received the B.Eng. degree in information and control engineering, and the Ph.D. degree in biomedical engineering from Xi’an Jiaotong University, Xi’an, China, in 1995 and 2000, respectively. He was with the University of Glasgow, Glasgow, U.K., and Imperial College London, London, U.K., from 2000 to 2008. He is currently a full professor with the Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences, Shenzhen, China. He has published over 200 scientific papers, authored four book chapters, and holds 60 patents. His current research interests include body sensor network, digital signal processing, and biomedical engineering
-%\end{IEEEbiography}
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{WL.pdf}}]{Lei Wang}
+received the B.Eng. degree in information and control engineering, and the Ph.D. degree in biomedical engineering from Xi’an Jiaotong University, Xi’an, China, in 1995 and 2000, respectively. He was with the University of Glasgow, Glasgow, U.K., and Imperial College London, London, U.K., from 2000 to 2008. He is currently a full professor with the Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences, Shenzhen, China. He has published over 200 scientific papers, authored four book chapters, and holds 60 patents. His current research interests include body sensor network, digital signal processing, and biomedical engineering
+\end{IEEEbiography}
 
 % if you will not have a photo at all:
 
-\begin{IEEEbiographynophoto}{Yan Yan}
-received the B.Eng. degree and the MSc in Instrument Engineering at the Harbin Institute of Technology in 2010 and 2012 respectively. He worked as research assistance at the Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences from 2012 to 2014. He is working on his PhD in Computer Science started from 2014.His research interests are digital signal processing, machine learning, and control system.
-\end{IEEEbiographynophoto}
+%\begin{IEEEbiographynophoto}{Yan Yan}
+%received the B.Eng. degree and the MSc in Instrument Engineering at the Harbin Institute of Technology in 2010 and 2012 respectively. He worked as research assistance at the Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences from 2012 to 2014. He is working on his PhD in Computer Science started from 2014.His research interests are digital signal processing, machine learning, and control system.
+%\end{IEEEbiographynophoto}
 
-\begin{IEEEbiographynophoto}{Lei Wang}
-received the B.Eng. degree in information and control engineering, and the Ph.D. degree in biomedical engineering from Xi’an Jiaotong University, Xi’an, China, in 1995 and 2000, respectively. He was with the University of Glasgow, Glasgow, U.K., and Imperial College London, London, U.K., from 2000 to 2008. He is currently a full professor with the Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences, Shenzhen, China. He has published over 200 scientific papers, authored four book chapters, and holds 60 patents. His current research interests include body sensor network, digital signal processing, and biomedical engineering
-\end{IEEEbiographynophoto}
+%\begin{IEEEbiographynophoto}{Lei Wang}
+%received the B.Eng. degree in information and control engineering, and the Ph.D. degree in biomedical engineering from Xi’an Jiaotong University, Xi’an, China, in 1995 and 2000, respectively. He was with the University of Glasgow, Glasgow, U.K., and Imperial College London, London, U.K., from 2000 to 2008. He is currently a full professor with the Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences, Shenzhen, China. He has published over 200 scientific papers, authored four book chapters, and holds 60 patents. His current research interests include body sensor network, digital signal processing, and biomedical engineering
+%\end{IEEEbiographynophoto}
 
 
 % insert where needed to balance the two columns on the last page with
