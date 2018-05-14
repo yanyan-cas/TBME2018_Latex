@@ -446,9 +446,11 @@
 % As a general rule, do not put math, special symbols or citations
 % in the abstract or keywords.
 \begin{abstract}
-Arrhythmia analysis had been a classical research topic for decades. The various and changing morphologic features in the time series brought challenges for automated analysis. A geometrical descriptor for the time series is the mapping from the original input into some manifold. In this work, we investigate several manifold learning methods for electrocardiography embeddings, using the learned manifold features for arrhythmia analysis.  
-The manifold methods have been validated on the MIT-BIH Arrhythmia Database. The intrinsic dimension analysis and the imbalance problem of electrocardiography dataset have been experimented and discussed.
-The proposed experiments shows that the multi-layer autoencoder generates a better representations than the other geometrical rule based manifold learning methods.
+Arrhythmia analysis had been a traditional research topic for decades. The various and changing morphologic features in the time series brought challenges for automated analysis. A geometrical descriptor for the time series is the mapping from the original input into some manifold. In this work, we investigate several manifold learning methods for electrocardiography embeddings, using the learned manifold features for arrhythmia analysis.  
+The manifold methods have been validated on the MIT-BIH Arrhythmia Database for arrhythmia analysis. The intrinsic dimension analysis and the imbalance problem of electrocardiography dataset have been experimented and discussed.
+The proposed experiments show that the manifold learning methods can generate meaningful representations for the arrhythmia classification.
+However, the multi-layer autoencoder performs better than the other geometrical rule-based manifold learning methods.
+The best results for this multi-class classification problem indicated an specificity of  98.30\% for ventricular ectopic beat class, and  84.71\% for supraventricular ectopic beat class, which is comparable to other similar tasks.
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
@@ -490,23 +492,20 @@ Manifold Learning, Arrhythmia, ECG Classification, Machine Learning
 % Here we have the typical use of a "T" for an initial drop letter
 % and "HIS" in caps to complete the first word.
 \IEEEPARstart{T}{he} computer aided system for pathology detection and diagnosis are based on a feature space constructed from abundant clinical attributes.
-The noninvasive, inexpensive and well-established technology of electrocardiographic signal in mobile health or personal health has the greatest popularity in heart function analysis. 
+The noninvasive, inexpensive and well-established technology of electrocardiographic signal in mobile health or personal health has the most significant popularity in heart function analysis. 
 Automated arrhythmia analysis provides indispensable assist in long-term clinical monitoring, and a large number of approaches have been proposed for the task, easing the diagnosis of arrhythmic changes as well as further inspection, e.g., heart rate variability or heart turbulence analysis.
-Information in  electrocardiography signals related to the cardiac electrical activity is therefore represented by a large dimensional space from the data analysis angle.
-Plenty of parameters were extracted from the high dimensional data as the indicators for diagnosis. 
-The large dimensional space hinders a proper interpretation of the embedded symbolic physiology in the feature space \cite{delgado2009dimensionality}.
-However, the increasingly developing of the artificial intelligence domain and machine learning methods provides powerful tools to deal with the large dimensional electrocardiography data.
+Therefore, information on electrocardiography signals related to the cardiac electrical activity would be represented by a large dimensional space from the data analysis angle.
+Plenty of parameters have been extracted from the high dimensional data as the indicators for diagnosis. 
+The high dimensional space hinders a proper interpretation of the embedded symbolic physiology in the feature space \cite{delgado2009dimensionality}.
+However, the increasingly developing of the artificial intelligence domain and machine learning methods provides powerful tools to deal with the high dimensional electrocardiography data.
 
 
 
 Lots of machine learning algorithms had been proposed for the classification and detection of electrocardiography signals. 
-The electrocardiography classification or detection task had been divided into two parts: the feature extraction process and classifier. 
-Simple classifier such as linear discriminants \cite{chaza} and kNN \cite{melgan}, more complex classifiers like neural networks \cite{jiang, olmez, lin, osowski}, fuzzy inference engines \cite{osowski, kundu}, hidden Markov model \cite{andreao, coast}, independent component analysis \cite{zhu} and support vector machine  \cite{melgan, kampoura, khandoker} were also adopted by lots of researchers.  
-
-
-
-Beyond the classifier, the performance of a recognition system highly depends on the determination of extracted electrocardiography features. Time domain features, frequency domain features, and statistical measures features for six fundamental waves (PQRSTU) had been used in feature extraction process \cite{chia}. 
-Time domain features like morphological features include shapes, amplitudes, and durations were adapted primarily in \cite{jekova, christove, can}, frequency domain features like wavelet transformation were widely used \cite{inan}, \cite{banerjee} stationary features like higher-order statistics also had been developed. 
+Linear discriminants \cite{chaza} and kNN \cite{melgan}, more complex classifiers like neural networks \cite{jiang, olmez, lin, osowski}, fuzzy inference engines \cite{osowski, kundu}, hidden Markov model \cite{andreao, coast}, independent component analysis \cite{zhu} and support vector machine  \cite{melgan, kampoura, khandoker} were also adopted by lots of researchers.  
+ECG arrhythmia recognition systems highly depend on the determination of extracted electrocardiography features. 
+Morphological features, frequency domain features, and statistical measures features for the six fundamental wave components (PQRSTU) are the most significant extracted features\cite{chia}. 
+Morphological features include shapes, amplitudes, and durations were adapted primarily in \cite{jekova, christove, can}, frequency domain features like wavelet transformation were widely used \cite{inan}, \cite{banerjee} stationary features like higher-order statistics also had been developed. 
 Principal component analysis \cite{stam} and Hermite functions \cite{lager} have been used in electrocardiography classification and related analysis technologies as well.
 Almost every single published paper proposes a new set of features to be used, or a new combination of the existing ones \cite{mar}.
 
@@ -517,17 +516,32 @@ The application of artificial intelligence methods has become an important trend
 The data explosion puts forward the new request to the method of data processing and information mining.
 
 
+Unsupervised learning-based approaches and the application to electrocardiogram classification in literatures mainly include clustering-based techniques \cite{lager, nishizawa, maier}, self-adaptive neural network-based methods \cite{palreddy, risk} and some hybrid unsupervised learning systems \cite{tadejko}. 
+Recently, the developing of deep learning had proposed fruitful results in extracting representations from the original data space with large unlabelled data samples \cite{gogna2017semi}.
 
-Over the past decades computational techniques proliferated in the pattern recognition field, simultaneously the applications in electrocardiography recognition, detection and classification for relevant trends, patterns, and outliers. 
-Most of the literatures in the electrocardiography classification task were focused on the supervised learning methods, as in unsupervised learning methods were infrequently used, which needs a lot of effort in labelling data. The MIT-BIH database \cite{physionet} was the most widely used data in the classification and detection algorithm developments, while mass unlabelled electrocardiography data had been ignored due to the supervise learning approaches essential. 
-Unsupervised learning methods become crucial in mining or analysing unlabelled data, as the unlabelled electrocardiography data accumulated. Unsupervised learning-based approaches and the application to electrocardiogram classification in literatures mainly include clustering-based techniques \cite{lager, nishizawa, maier}, self-adaptive neural network-based methods \cite{palreddy, risk} and some hybrid unsupervised learning systems \cite{tadejko}. 
+In deep learning, the neural networks based multiple levels of representations, which correspond to different levels of abstraction or concepts.
+However, manifold learning, or dimensionality reduction, the methods come from the motivation that there might be meaningful structure of data which has fewer independent degrees of freedom than the input dimensionality \cite{tenenbaum2000global, roweis2000nonlinear}.
+Here we use the low-dimensional descriptor or manifold features, while are computed with some data embedding or manifold learning methods.
 
-Manifold learning is a kind of method attempting to uncover the manifold structure in a data set, it can also be considered as a kind of nonlinear dimensional reduction technique.
-It has been widely used in multivariate data classification, data analysis, and data visualization.
-Manifold learning directly map the input data space into some feature space to find a better descriptor to analysis the real world problems. 
+The manifold learning algorithms are mainly differ in the way for computing manifold embeddings, usually they do preserve certain properties or characteristics of the original high-dimensional data space.
+For example, the principal component analysis (PCA) attempts to preserve the data variance, multidimensional scaling attempts to preserve the Euclidean distance between all the original data points.
+Generate embeddings based on the geometrical properties of data can provide meaning features for the classification tasks. 
 
-Manifold learning directly map the input data space into some feature space to find a better descriptor to analysis the real world problems. 
-Manifold learning directly map the i
+Manifold learning had been successful used in facial expression recognition\cite{cheon2009natural}, image retrieval \cite{lin2005semantic}, ECG base ischemia analysis \cite{delgado2009dimensionality}, etc.
+In this paper, we investigate several classical manifold learning methods for the application for arrhythmia analysis, which is based on ECG time series data samples.
+We proposed the framework to embed ECG time series into some manifolds generating the embedded features. With a softmax classifier trained based on the embedded features, the classification task can be performed in the related manifold. Then the classification results can be used for arrhythmia analysis.
+
+Besides, we consider autoencoder from the view point of manifold, but we tried to get the autoencoder embeddings in a quite different way from the others. An large unlabelled data set had been used in the training phase. This can be consider as some unknown geometrical rules which had been used as the optimization condition for autoencoder. Also, we use a layer-wised method for the training of multi-layer neural networks as the deep learning literature showed.
+
+This organization of this paper is as follows. First we illustrated some manifold learning methods from Section II-A to Section II-G, then the softmax classifier was introduced. Then we described the experiments settings and some tricks should focus in manifold learning for ECG analysis in Section-III. Section IV shows the results and comparative analyses. while Section V concludes the paper.
+
+
+
+%Manifold learning is a kind of method attempting to uncover the manifold structure in a data set, it can also be considered as a kind of nonlinear dimensional reduction technique.
+%It has been widely used in multivariate data classification, data analysis, and data visualization.
+%Manifold learning directly map the input data space into some feature space to find a better descriptor to analysis the real world problems. 
+
+%Manifold learning directly map the input data space into some feature space to find a better descriptor to analysis the real world problems. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -775,7 +789,7 @@ c_i = \argmax g(\bm{y}^{(i)}, \bm{\theta})
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\section{Experiments And Results}
+\section{Materials And Experiments}
 We include the above mentioned methods for the ECG arrhythmia classification task for a comparative study for an illustration of manifold learning in time series based biomedical signal analysis.
 In this section we first make a short description about the task and data types since this problem had been quite well discussed in related literatures, after which the experiment flows are illustrated.
 
@@ -789,6 +803,46 @@ In this section we first make a short description about the task and data types 
 %While the autoencoder based method 
 \subsection{ECG Arrhythmia \& Heartbeat Classification}
 
+
+\begin{table*}[!htbp]
+\begin{center}
+\begin{threeparttable}
+\caption{AAMI Classes Mapped from MIT-BIH ECG Databases}
+\label{table1}
+\begin{tabular}{cllllll}
+\hline
+& AAMI heartbeat classes & N & S & V & F & Q \\
+& Description  &Any heartbeat not in & Supraventricular ectopic  & Ventricular ectopic  & Fusion beat & Unknown beat \\
+&                     &the S,V,F or Q class & beat   		     & beat	      &	     &          \\
+\hline
+& MIT-BIH heartbeat  &Normal beat (1)            & Aberrated atrial premature & Ventricular escape & Fusion of ventricular& Paced beat (12)\\
+&  types (codes)   &  					  &  beat (11)		    &  beat(10)	            & \& normal beat (6)		      &             \\
+
+&                     &Left bundle branch   &  Nodal (junctional) &Premature ventricular& 	 &  Unclassifiable \\
+&                     &block beat (2)            & premature beat (7)    &contraction (5)         &	   & beat (13)   \\
+
+&                     & Right bundle branch & Atrial premature & Ventricular flutter &    &  Fusion of paced  \\
+&                     & block beat (3) & contraction (8)     & wave (31) & 	   & and normal (38)  \\
+
+&                     & Nodal escape  & Premature or ectopic & 	     &  &                          \\
+&                     & beat (11)	  & supraventricular beat(9) &     &   &     \\
+
+&                     & Atrial escape beat (34)   &  	  				      & 				            & 			      &                          \\
+%\hline
+%& MITBIH-AR$^a$(100,687) & 89,925$^b$   & 2,774   & 7,171   & 802    & 15        \\
+%& MITBIH-LT(667,347) & 600,197  &  150  & 64,090  & 	2,906   & 0       \\
+
+\hline
+\end{tabular}
+%\begin{tablenotes}
+
+%\end{tablenotes}
+\end{threeparttable}
+
+\end{center}
+     \end{table*}
+
+
 After the segmentation for the ECG records, we got plenty of ECG waveform samples with variety categories. 
 Since different physiological disorder may be reflected on the different type of abnormal heartbeat rhythms. 
 For the task of classification, it is quite important to determine the classes would be used. 
@@ -796,14 +850,16 @@ In the early literatures, there were no unified class labels for an ECG classifi
 The MIT-BIH Arrhythmia Database was the first available set of standard test material for evaluation of arrhythmia detectors; it played an important role in stimulating manufacturers of arrhythmia analyzers to compete by objectively measurable performance. 
 The annotations in the open database for the ECG categories adopted the ANSI/AAMI EC57: 1998/(R)2008 standard AAMI (2008), which recommended to group the heartbeats into five classes: on-ectopic beats (N); supraventricular ectopic beat (S); ventricular ectopic beat (V); fusion of a V and a N (F); unknown beat type (Q). These classes or labels have been widely used in the ECG classification tasks. 
 The normal beat, supraventricular ectopic beat and the ventricular ectopic beat categories were used much more frequently while the unknown beat type were abandoned because of its clinical valueless.
+Table \ref{table1} illustrated the categories for the arrhythmia analysis task.
 
 The most popular dataset used in arrhythmia analysis task is the MIT-BIH Arrhythmia Database [23] which contains 48 half-hour recordings each containing two 30-min ECG lead signals (lead I and lead II), sampled at 340Hz. 
 However, only the lead I was used in this study. 
 In agreement with the AAMI recommended practice, the four recordings with paced beats were removed from the analysis. 
 
-Besides, a unlabelled data set of ambulatory electrocardiography were used in this study, which includes recordings of 100 subjects with partial arrhythmia ECG samples. 
+Besides, a unlabelled data set of ambulatory electrocardiography collected from the Sun Yat-sen Cardiovascular Hospital were used in this study, which includes $24$-hour recordings of $100$ subjects with partial arrhythmia ECG samples. 
 This dataset would be used in the autoencoder pre-training, which has been quite popular in the deep learning literatures.
 Even though we explore autoencoder method from a manifold angle, a pre-training procedure is powerful strategy in extracting manifold representations for arrhythmia analysis.
+
 
 
 
@@ -859,16 +915,16 @@ The class distributions are illustrated in Table \ref{distriofData}, a more comp
 \begin{center}
 \begin{threeparttable}
 \caption{Comparisons Of Imbalanced And Balanced Of DS-I From MITBHI-AR}
-\label{table1}
+\label{distriofData}
 \begin{tabular}{ccccccc}
 \hline
-& Classes & N & S & V & F & Q \\
+& Classes & N & S & V  & F \\
 \hline
-& Imbalanced  &90431  & 2774  & 7698 & 802  &8023\\
-& Ratio & 82.4\%&  2.5\%& 7\% &  0.7\% & 7.3\% \\
+& Imbalanced  &90431  & 2774  & 7698   &8023\\
+& Ratio & 83.0\%&  2.5\%& 7.1\%  & 7.3\% \\
 \hline
-& Balanced  & 18086 & 2774  & 7698 & 802 & 8023         \\
-& Ratio & 48.38\%&  7.5\%& 20\% &  2.2\% & 21.5\% \\
+& Balanced  & 18086 & 2774  & 7698 & 8023         \\
+& Ratio & 49.5\%&  7.6\%& 21\%  & 21.9\% \\
 \hline
 \end{tabular}
 \end{threeparttable}
@@ -934,13 +990,13 @@ A $5$-fold cross validation had been applied for the whole training and predict,
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Performance Analysis}
-Correctly detected episodes are termed true positive (TP) episodes, while the missed as false negatives (FNs).
-When a negative episode in some class is predicted as true is called true negative, and a false positive (FP) if it is considered as positive. And the sensitivity(Se), specificity(Sp),  Precision, and F score are defined as following with respectively:
+Correctly detected episodes are termed true positive (TPs) episodes, while the missed as false negatives (FNs).
+When a negative episode in some class is predicted as true is called true negative (TNs), and a false positive (FPs) if it is considered as positive. And the sensitivity(Se), specificity(Sp), and F1-score are defined as following with respectively:
+
 \begin{equation}
 \begin{split}
-Se = \frac{TP}{TP+FN} \quad Sp = \frac{TN}{TN+FP}\\
-Precision = \frac{TP}{TP + FP}\\
-F1-Score = \frac{2TP}{2TP+FP+FN}
+Se = \frac{TP}{TP+FN} \quad \\
+ Sp = \frac{TN}{TN+FP}
 \end{split}
 \end{equation}
 Refer \cite{mar} for an further knowledge for parameters for algorithm evaluation in ECG data analysis.
@@ -955,214 +1011,242 @@ Refer \cite{mar} for an further knowledge for parameters for algorithm evaluatio
 
 
 \section{Results and Discussion}
-Using the projectors from Section II, we use the time series based manifold feature to perform classification task. Since the working
+Using the projectors from Section II, we use the time series based manifold feature to perform classification task. 
+From the intrinsic dimensional analysis, we have the parameter for the dimension of 1-lead ECG heartbeat is $14$.
+Then we use it as a key parameter in the embedding calculations. 
 
+\subsection{Experimental Results With Manifold Representations}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                     PCA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Experimental Results}
+In Table \ref{pca} the results for using PCA dimensionality reduction with softmax classifier are illustrated, the input dimension of $340$ was mapped into a $14$-dimensional feature space.
+\begin{table}[!htbp]
+\begin{center}
+\begin{threeparttable}
+\caption{Test Result PCA With Softmax}
+\label{pca}
+\begin{tabular}{ccccccc}
+\hline
+\multicolumn{5}{r}{Algorithm label} \\
+\cline{3-6}
+		&  & N & S      & V    & F       & T\\
+\hline
+ Reference & N & 3397 &  23  &  244   & 26    &  3617 \\
+	label  & S &  105    & 395  &   45   & 9    &  555\\
+		   & V &  246    & 34    & 1194 & 58    &  1540\\
+		   & F &  71   & 10    & 90    & 1432   &  1605\\		
+\hline
+\end{tabular}
+\end{threeparttable}
+\end{center}
+\end{table}
 
-\lipsum[1]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                     KPCA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In Table \ref{kpca} the results for using Gaussian kernel based PCA was used, the problem faced for kernel PCA is the high computation consumption for kernel matrix  computation, the size of the kernel matrix is proportional to the square of the number of samples in the dataset.
 
 \begin{table}[!htbp]
 \begin{center}
 \begin{threeparttable}
-\caption{Test Result for 4-Hidden-Layer Autoencoder Network}
-\label{table7}
-\begin{tabular}{cccccccc}
+\caption{Test Result Gaussian Kernel With Softmax}
+\label{kpca}
+\begin{tabular}{ccccccc}
 \hline
-\multicolumn{6}{r}{Algorithm label} \\
-\cline{3-7}
-		&  & N & S      & V    & F     & Q   & T\\
+\multicolumn{5}{r}{Algorithm label} \\
+\cline{3-6}
+		&  & N & S      & V    & F       & T\\
 \hline
- Reference & N & 41,778 &  38  &  48   & 17  & 5  &  41,886 \\
-	label  & S &  93    & 460  &   3   & 1   & 2  &  559\\
-		   & V &  52    & 1    & 4,067 & 11  & 6  &  4,137\\
-		   & F &  15    & 0    & 13    & 214 & 2  &  244\\
-		   & Q &  1     & 0    & 1     & 1   & 1  &  5\\
+ Reference & N & 3421 &  30  &  132  & 34    &  3617 \\
+	label  & S & 113     & 401  &  34   & 7    &  555\\
+		   & V & 238  & 29   & 1203 & 70    &  1540\\
+		   & F & 67    & 8    & 74    & 1456   &  1605\\		
 \hline
 \end{tabular}
-\begin{tablenotes}
-\item The test accuracy is about $99.34\%$.
-\end{tablenotes}
 \end{threeparttable}
 \end{center}
 \end{table}
 
 
-\lipsum[2]
-
-
-
-\begin{figure}[!htbp]
-\centering
-\includegraphics[width=3.8 in]{eps/test.pdf}
- where an .eps filename suffix will be assumed under latex, 
- and a .pdf suffix will be assumed for pdflatex; or what has been declared
- via \DeclareGraphicsExtensions.
-\caption{Simulation results for the network.}
-\label{fig_sim}
-\end{figure}
-
-
-\lipsum[1]
-
-
-
-\begin{figure}[!htbp]
-\centering
-\includegraphics[width=3.8 in]{eps/test.pdf}
- where an .eps filename suffix will be assumed under latex, 
- and a .pdf suffix will be assumed for pdflatex; or what has been declared
- via \DeclareGraphicsExtensions.
-\caption{Simulation results for the network.}
-\label{fig_sim}
-\end{figure}
-
-\lipsum[1]
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                     MVU
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Table \ref{mvu} and Table \ref{isomap} illustrate the results for using maximum variance unfolding and Isomap respectively. Since they both use geodesic distances between data points as constraints, the face the sample problem in topological instability, this is because they may construct erroneous connections in the neighborhood graph. 
 \begin{table}[!htbp]
 \begin{center}
 \begin{threeparttable}
-\caption{Test Result for 4-Hidden-Layer Autoencoder Network}
-\label{table7}
-\begin{tabular}{cccccccc}
+\caption{Test Result MVU With Softmax}
+\label{mvu}
+\begin{tabular}{ccccccc}
 \hline
-\multicolumn{6}{r}{Algorithm label} \\
-\cline{3-7}
-		&  & N & S      & V    & F     & Q   & T\\
+\multicolumn{5}{r}{Algorithm label} \\
+\cline{3-6}
+		&  & N & S      & V    & F       & T\\
 \hline
- Reference & N & 41,778 &  38  &  48   & 17  & 5  &  41,886 \\
-	label  & S &  93    & 460  &   3   & 1   & 2  &  559\\
-		   & V &  52    & 1    & 4,067 & 11  & 6  &  4,137\\
-		   & F &  15    & 0    & 13    & 214 & 2  &  244\\
-		   & Q &  1     & 0    & 1     & 1   & 1  &  5\\
-\hline
-\end{tabular}
-\begin{tablenotes}
-\item The test accuracy is about $99.34\%$.
-\end{tablenotes}
-\end{threeparttable}
-\end{center}
-\end{table}
-
-\lipsum[1]
-\begin{table}[!htbp]
-\begin{center}
-\begin{threeparttable}
-\caption{Test Result for 4-Hidden-Layer Autoencoder Network}
-\label{table7}
-\begin{tabular}{cccccccc}
-\hline
-\multicolumn{6}{r}{Algorithm label} \\
-\cline{3-7}
-		&  & N & S      & V    & F     & Q   & T\\
-\hline
- Reference & N & 41,778 &  38  &  48   & 17  & 5  &  41,886 \\
-	label  & S &  93    & 460  &   3   & 1   & 2  &  559\\
-		   & V &  52    & 1    & 4,067 & 11  & 6  &  4,137\\
-		   & F &  15    & 0    & 13    & 214 & 2  &  244\\
-		   & Q &  1     & 0    & 1     & 1   & 1  &  5\\
+ Reference & N & 3452 &  20  &  138   & 7   &  3617 \\
+	label  & S &  98    & 357  &  48   & 52   &  555\\
+		   & V &  231    & 27    & 1183 & 99    &  1540\\
+		   & F &  51    & 12    & 11    & 1531   &  1605\\		
 \hline
 \end{tabular}
-\begin{tablenotes}
-\item The test accuracy is about $99.34\%$.
-\end{tablenotes}
-\end{threeparttable}
-\end{center}
-\end{table}
-\lipsum[1]
-
-\begin{table}[!htbp]
-\begin{center}
-\begin{threeparttable}
-\caption{Test Result for 4-Hidden-Layer Autoencoder Network}
-\label{table7}
-\begin{tabular}{cccccccc}
-\hline
-\multicolumn{6}{r}{Algorithm label} \\
-\cline{3-7}
-		&  & N & S      & V    & F     & Q   & T\\
-\hline
- Reference & N & 41,778 &  38  &  48   & 17  & 5  &  41,886 \\
-	label  & S &  93    & 460  &   3   & 1   & 2  &  559\\
-		   & V &  52    & 1    & 4,067 & 11  & 6  &  4,137\\
-		   & F &  15    & 0    & 13    & 214 & 2  &  244\\
-		   & Q &  1     & 0    & 1     & 1   & 1  &  5\\
-\hline
-\end{tabular}
-\begin{tablenotes}
-\item The test accuracy is about $99.34\%$.
-\end{tablenotes}
-\end{threeparttable}
-\end{center}
-\end{table}
-
-\lipsum[1]
-
-\begin{table}[!htbp]
-\begin{center}
-\begin{threeparttable}
-\caption{Test Result for 4-Hidden-Layer Autoencoder Network}
-\label{table7}
-\begin{tabular}{cccccccc}
-\hline
-\multicolumn{6}{r}{Algorithm label} \\
-\cline{3-7}
-		&  & N & S      & V    & F     & Q   & T\\
-\hline
- Reference & N & 41,778 &  38  &  48   & 17  & 5  &  41,886 \\
-	label  & S &  93    & 460  &   3   & 1   & 2  &  559\\
-		   & V &  52    & 1    & 4,067 & 11  & 6  &  4,137\\
-		   & F &  15    & 0    & 13    & 214 & 2  &  244\\
-		   & Q &  1     & 0    & 1     & 1   & 1  &  5\\
-\hline
-\end{tabular}
-\begin{tablenotes}
-\item The test accuracy is about $99.34\%$.
-\end{tablenotes}
 \end{threeparttable}
 \end{center}
 \end{table}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                     ISOMAP
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
-\subsection{Comparisons}
-\subsubsection{Manifold Methods}
-
-\lipsum[1]
-
-\subsubsection{Comparison With Other Works}
-\lipsum[1]
 
 \begin{table}[!htbp]
 \begin{center}
 \begin{threeparttable}
-\caption{Test Result for 4-Hidden-Layer Autoencoder Network}
-\label{table7}
-\begin{tabular}{cccccccc}
+\caption{Test Result Isomap With Softmax}
+\label{isomap}
+\begin{tabular}{ccccccc}
 \hline
-\multicolumn{6}{r}{Algorithm label} \\
-\cline{3-7}
-		&  & N & S      & V    & F     & Q   & T\\
+\multicolumn{5}{r}{Algorithm label} \\
+\cline{3-6}
+		&  & N & S      & V    & F       & T\\
 \hline
- Reference & N & 41,778 &  38  &  48   & 17  & 5  &  41,886 \\
-	label  & S &  93    & 460  &   3   & 1   & 2  &  559\\
-		   & V &  52    & 1    & 4,067 & 11  & 6  &  4,137\\
-		   & F &  15    & 0    & 13    & 214 & 2  &  244\\
-		   & Q &  1     & 0    & 1     & 1   & 1  &  5\\
+ Reference & N & 3349 &  39  &  192   & 37   &  3617 \\
+	label  & S &  95    & 387  &   61   & 12    &  555\\
+		   & V &  194    & 27    & 1257 & 62    &  1540\\
+		   & F &  68    & 19    & 157    & 1361  &  1605\\		
 \hline
 \end{tabular}
-\begin{tablenotes}
-\item The test accuracy is about $99.34\%$.
-\end{tablenotes}
+
+\end{threeparttable}
+\end{center}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                     LLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+In Table \ref{LLE} the results for using local linear embedding for classification were shown. They preserve local properties of the data, and shows 
+
+\begin{table}[!htbp]
+\begin{center}
+\begin{threeparttable}
+\caption{Test Result LLE With Softmax}
+\label{LLE}
+\begin{tabular}{ccccccc}
+\hline
+\multicolumn{5}{r}{Algorithm label} \\
+\cline{3-6}
+		&  & N & S      & V    & F       & T\\
+\hline
+ Reference & N & 3206 &  41 &  287   & 83    &  3617 \\
+	label  & S &  98    & 349  &  93   & 15    &  555\\
+		   & V &  197    & 43    &  1267 & 33    &  1540\\
+		   & F &  101    & 34    & 68   & 1402   &  1605\\		
+\hline
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                     LE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In Table \ref{Laplacian} the results for using laplacian eigenmaps  embedding for classification were shown:
+
+
+\begin{table}[!htbp]
+\begin{center}
+\begin{threeparttable}
+\caption{Test Result for LE With Softmax}
+\label{Laplacian}
+\begin{tabular}{ccccccc}
+\hline
+\multicolumn{5}{r}{Algorithm label} \\
+\cline{3-6}
+		&  & N & S      & V    & F       & T\\
+\hline
+ Reference & N & 3476 & 19  &  103 & 19    &  3617 \\
+	label  & S &  23    & 421  &   80   & 31    &  555\\
+		   & V &  191    & 21    & 1269 & 59    &  1540\\
+		   & F &  80   & 14    & 44    & 1467   &  1605\\		
+\hline
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                     SAE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In Table \ref{Laplacian} the results for using multi-layer autoencoder embedding for classification were shown:
+
+
+\begin{table}[!htbp]
+\begin{center}
+\begin{threeparttable}
+\caption{Test Result For Multi-Layer Autoencoder Network With Softmax}
+\label{table7}
+\begin{tabular}{ccccccc}
+\hline
+\multicolumn{5}{r}{Algorithm label} \\
+\cline{3-6}
+		&  & N & S      & V    & F       & T\\
+\hline
+ Reference & N & 3578 & 5 &  24   & 10    &  3617 \\
+	label  & S &  26    &504  &  20   & 5    &  555\\
+		   & V &  19    & 39    & 1471 & 11    &  1540\\
+		   & F &  37    & 87    & 29    & 1452   &  1605\\		
+\hline
+\end{tabular}
 \end{threeparttable}
 \end{center}
 \end{table}
 
 
 
+
+
+
+  
+\subsection{Comparison of different multi-Layer autoencoder based methods}
+The autoencoder based nonlinear dimensionality reduction methods possess powerful representation ability.
+While the choice for the structure node numbers could be arbitrary sometime, here we arbitrarily tested several networks settings, and make a comparison with their experiment results. We found that for arrhythmia analysis problems, we may not need too ``deep" structures. The results are shown in Table \ref{aeresults}.
+
+  
+\begin{table}[!htbp]
+\begin{center}
+\begin{threeparttable}
+\caption{Performance Comparison For Different Multi-Layer Autoencoders}
+\label{aeresults}
+\begin{tabular}{cccccccc}
+\hline
+&  Items & N & S & V & F   \\
+\hline
+&3-Layer  &99.32\% & 83.21\% &98.24\% &  87.72\%  \\
+&4-Layer  &99.13\% & 74.23\%  & 97.12\% & 65.23\%       \\
+&5-Layer &98.74\% & 72.87\% & 96.98\% &  58.57\% \\
+\hline
+\end{tabular}
+\end{threeparttable}
+\end{center}
+\end{table}
+  
+   
+
+\subsection{Comparison with other methods}
+In \cite{mar} a feature selection strategy had been used for the ECG classification, a multi-layer perceptron method had been used to assess the mode, they try to use the artificial extracted features from the time series to build a automated model for ambulatory monitoring and arrhythmia analysis, typical results from \cite{chaza, melgan, jiang} are also illustrated for results comparison.
 
 \begin{table}[!htbp]
 \begin{center}
@@ -1171,23 +1255,18 @@ Using the projectors from Section II, we use the time series based manifold feat
 \label{table1}
 \begin{tabular}{cccccccc}
 \hline
-&  Items & N-Sp & S-Sp & V-Sp & F-Sp & Q-Sp & F-Score \\
+&  Items & N & S & V & F   \\
 \hline
-& PCA  &90\%)  & 20\%  & 2233 & 122\%  &1222 & 1\\
 
-& KPCA  &2 & 3  & d &d& 111   &1      \\
-
-& MVU  &2 & 3  & d &d& 111   &1      \\
+&Proposed &$\bm{98.30}$\% & $\bm{84.71}$\% & $\bm{95.27}$ \%& $\bm{87.72}$\%\\
+& Mar. \cite{mar}  &84.85\% & 82.29\% & 86.72\% &51.55\%      \\
 
 
-& Isompa  &2 & 3  & d &d& 111   &1      \\
+& Chazal. \cite{chaza} &86.86\% & 83.83\%  & 77.74\% & 89.43\%      \\
 
+& Melgani.\cite{melgan}  &89.12\% & -  & 89.97\%  & -       \\
 
-& LLE  &2 & 3  & d &d& 111   &1      \\
-
-& LE  &2 & 3  & d &d& 111   &1      \\
-
-& SAE  &2 & 3  & d &d& 111   &1      \\
+& Jiang.\cite{jiang}  & 94.51\% & 50.59\%  & 86.61\% & 35.78\%       \\
 
 
 \hline
@@ -1206,19 +1285,16 @@ Using the projectors from Section II, we use the time series based manifold feat
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Conclusion and Future Work}
+In this paper, we investigated the manifold learning methods to facilitate the multi-class classification problem of electrocardiography in arrhythmia analysis.
+Typical manifold learning methods had been investigated, capable of generating meaningful features for classification.
+The manifold methods always keep some constraints based on geometrical condition.
+PCA preserve the data variance, kernel PCA focuses on retaining the pairwise distances, MVU has the constraints in maximizing the Euclidean distance between data points with keeping the distances inside the neighborhood graph, Isomap attempting to preserve pairwise geodesic distances, LLE only consider the local properties of data i.e. locally linearity, and for Laplacian Eigenmaps works in a ameliorate way, a weighted distance in neighborhood had been used.
 
-\lipsum[1-2]
+All these methods may face some weak points under the geometrical constraints, compare to the multi-layer autoencoder neural networks.
+The multi-layer autoencoder learn a neural network structure by training with lots of data in a self-mapping-and-reconstruction way.
+Though it is not easy to employ some graceful theoretical explanations, its powerful representation ability could perform much better in this classification task.
 
-
-
-
-
-
-
-
-
-
-
+The other important concern in the arrhythmia analysis problem is the multi-lead combinational analysis, since in different signal channels the heart physiological information was represented in different way. The manifold learning methods could help to reduction the redundancy dimension, and propose better feature for analysis.
 
 
 % An example of a floating figure using the graphicx package.
@@ -1331,9 +1407,9 @@ Using the projectors from Section II, we use the time series based manifold feat
 % if you want by leaving the argument blank
 
 % use section* for acknowledgment
-%\section*{Acknowledgment}
+\section*{Acknowledgment}
 %The author would like to thank for the reviewer for advices.
-%This work was supported by the National Natural Science Foundation of China, Grant No. 71531004.
+This work was supported by the National Natural Science Foundation of China, Grant No. 71531004.
 
 
 % Can use something like this to put references on a page
@@ -1385,23 +1461,23 @@ Using the projectors from Section II, we use the time series based manifold feat
 %\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
 % or if you just want to reserve a space for a photo:
 
-\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{YY.pdf}}]{Yan Yan}
-received the B.Eng. degree and the MSc in Instrument Engineering at the Harbin Institute of Technology in 2010 and 2012 respectively. He worked as research assistance at the Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences from 2012 to 2014. He is working on his PhD in Computer Science started from 2014.His research interests are digital signal processing, machine learning, and control system.
-\end{IEEEbiography}
+%\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{YY.pdf}}]{Yan Yan}
+%(M'15) received the B.Eng. degree and the MSc in Instrument Engineering at the Harbin Institute of Technology in 2010 and 2012 respectively. He worked as research assistance at the Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences from 2012 to 2014. He is working on his PhD in Computer Science started from 2014.His research interests are digital signal processing, machine learning, and control system.
+%\end{IEEEbiography}
 
-\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{WL.pdf}}]{Lei Wang}
-received the B.Eng. degree in information and control engineering, and the Ph.D. degree in biomedical engineering from Xi’an Jiaotong University, Xi’an, China, in 1995 and 2000, respectively. He was with the University of Glasgow, Glasgow, U.K., and Imperial College London, London, U.K., from 2000 to 2008. He is currently a full professor with the Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences, Shenzhen, China. He has published over 200 scientific papers, authored four book chapters, and holds 60 patents. His current research interests include body sensor network, digital signal processing, and biomedical engineering
-\end{IEEEbiography}
+%\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{WL.pdf}}]{Lei Wang}
+%received the B.Eng. degree in information and control engineering, and the Ph.D. degree in biomedical engineering from Xi’an Jiaotong University, Xi’an, China, in 1995 and 2000, respectively. He was with the University of Glasgow, Glasgow, U.K., and Imperial College London, London, U.K., from 2000 to 2008. He is currently a full professor with the Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences, Shenzhen, China. He has published over 200 scientific papers, authored four book chapters, and holds 60 patents. His current research interests include body sensor network, digital signal processing, and biomedical engineering
+%\end{IEEEbiography}
 
 % if you will not have a photo at all:
 
-%\begin{IEEEbiographynophoto}{Yan Yan}
-%received the B.Eng. degree and the MSc in Instrument Engineering at the Harbin Institute of Technology in 2010 and 2012 respectively. He worked as research assistance at the Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences from 2012 to 2014. He is working on his PhD in Computer Science started from 2014.His research interests are digital signal processing, machine learning, and control system.
-%\end{IEEEbiographynophoto}
+\begin{IEEEbiographynophoto}{Yan Yan}
+received the B.Eng. degree and the MSc in Instrument Engineering at the Harbin Institute of Technology in 2010 and 2012 respectively. He worked as research assistance at the Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences from 2012 to 2014. He is working on his PhD in Computer Science started from 2014.His research interests are digital signal processing, machine learning, and control system.
+\end{IEEEbiographynophoto}
 
-%\begin{IEEEbiographynophoto}{Lei Wang}
-%received the B.Eng. degree in information and control engineering, and the Ph.D. degree in biomedical engineering from Xi’an Jiaotong University, Xi’an, China, in 1995 and 2000, respectively. He was with the University of Glasgow, Glasgow, U.K., and Imperial College London, London, U.K., from 2000 to 2008. He is currently a full professor with the Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences, Shenzhen, China. He has published over 200 scientific papers, authored four book chapters, and holds 60 patents. His current research interests include body sensor network, digital signal processing, and biomedical engineering
-%\end{IEEEbiographynophoto}
+\begin{IEEEbiographynophoto}{Lei Wang}
+received the B.Eng. degree in information and control engineering, and the Ph.D. degree in biomedical engineering from Xi’an Jiaotong University, Xi’an, China, in 1995 and 2000, respectively. He was with the University of Glasgow, Glasgow, U.K., and Imperial College London, London, U.K., from 2000 to 2008. He is currently a full professor with the Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences, Shenzhen, China. He has published over 200 scientific papers, authored four book chapters, and holds 60 patents. His current research interests include body sensor network, digital signal processing, and biomedical engineering
+\end{IEEEbiographynophoto}
 
 
 % insert where needed to balance the two columns on the last page with
